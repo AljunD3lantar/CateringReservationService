@@ -3,6 +3,7 @@ package Admin;
 
 import User.user;
 import config.dbConnector;
+import Admin.userWindows;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -16,28 +17,48 @@ public class adminRegistration extends javax.swing.JFrame {
     
     public adminRegistration() {
         initComponents();
-        displayData();
     }
     
-    static String email, username, fullname;
-    
-    public void displayData(){
-        try{
-            dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT user_id, user_fulname, user_email FROM tbl_user");
-            userT.setModel(DbUtils.resultSetToTableModel(rs));
-             rs.close();
-        }catch(SQLException ex){
-            System.out.println("Errors: "+ex.getMessage());
-        
-        }
-    }
+    static String email, username;
     
     public boolean UserEmailExist(){
         
         dbConnector dbc = new dbConnector();
         try{
             String query = "SELECT * FROM tbl_user  WHERE user_username = '" + un.getText() + "'OR user_email = '" + em.getText() + "'";
+            ResultSet resultSet = dbc.getData(query);
+            
+            if(resultSet.next()){
+                email = resultSet.getString("user_email");
+                if(email.equals(em.getText())){
+                    JOptionPane.showMessageDialog(null, "Email already used!");
+                    em.setText("");
+                }
+                
+                username = resultSet.getString("user_username");
+                if(username.equals(un.getText())){
+                    JOptionPane.showMessageDialog(null, "Username already used!");
+                    un.setText("");
+                }
+                
+                return true;
+            }else{
+                return false;
+            }
+            
+        }catch(SQLException ex){
+            System.out.println(""+ex);
+            return false;
+        }
+        
+    }
+    
+     public boolean UserEmailUpdateCheck(){
+        
+        dbConnector dbc = new dbConnector();
+        try{
+            String query = "SELECT * FROM tbl_user  WHERE (user_username = '" + un.getText() + "'OR user_email = '" + em.getText()+"') AND user_id != '"+id.getText()+"'";
+                    
             ResultSet resultSet = dbc.getData(query);
             
             if(resultSet.next()){
@@ -72,8 +93,6 @@ public class adminRegistration extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        Logout = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -93,9 +112,11 @@ public class adminRegistration extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        userT = new javax.swing.JTable();
+        update = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -114,39 +135,18 @@ public class adminRegistration extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 102));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("ADMIN WINDOW");
-
-        Logout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        Logout.setText("LOGOUT");
-        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 628, Short.MAX_VALUE)
-                .addComponent(Logout)
-                .addContainerGap())
+            .addGap(0, 350, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Logout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 50));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -190,6 +190,47 @@ public class adminRegistration extends javax.swing.JFrame {
         jLabel8.setText("UserID:");
 
         id.setAutoscrolls(false);
+
+        update.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        update.setText("UPDATE");
+        update.setEnabled(false);
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+
+        delete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        delete.setText("DELETE");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
+        clear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        clear.setText("CLEAR");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
+        cancel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cancel.setText("CANCEL");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+
+        refresh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        refresh.setText("REFRESH");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -236,10 +277,22 @@ public class adminRegistration extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Add, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(us, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(us, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clear))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(update)
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,43 +336,20 @@ public class adminRegistration extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(us, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 350, 620));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 0));
-
-        userT.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(userT);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 590, 620));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 350, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,36 +375,28 @@ public class adminRegistration extends javax.swing.JFrame {
     return true;
 }
     
-    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
-        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to Logout?", "Select an Option...",
-            JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-        if(result == JOptionPane.YES_OPTION){
-            System.exit(0);
-        }
-    }//GEN-LAST:event_LogoutMouseClicked
-
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         if(fn.getText().isEmpty() || un.getText().isEmpty() || em.getText().isEmpty() ||
                 pw.getText().isEmpty() || pn.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "All fields are required.");
-        }else if(pw.getText().length() < 8){ 
+        } else if(pw.getText().length() < 8){ 
             JOptionPane.showMessageDialog(null, "Password character should be 8 and above.");
             pw.setText("");
-        }else if(!isPhoneNumberValid(pn.getText())){
+        } else if(!isPhoneNumberValid(pn.getText())){
             JOptionPane.showMessageDialog(null, "Phone number should only be contained numbers.");
             pn.setText("");
-        }else if(UserEmailExist()){
+        } else if(UserEmailExist()){
             System.out.println("Duplicate Exist");
-        }else{
-        dbConnector dbc = new dbConnector();
+        } else {
+            dbConnector dbc = new dbConnector();
             if(dbc.insertData("INSERT INTO tbl_user (user_id, user_fulname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
                     + "VALUES ('"+id.getText()+"', '"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pw.getText()+"', '"+pn.getText()+"', '"+
-                    ut.getSelectedItem().toString()+"', '"+us.getSelectedItem().toString()+"', 'Active')")){                                        
+                    ut.getSelectedItem().toString()+"', 'Active')")){
                 JOptionPane.showMessageDialog(null, "Registered Successfully!");
                 user ads = new user();
                 ads.setVisible(true);
                 this.dispose();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Connection Error!");
             }
         }
@@ -383,6 +405,47 @@ public class adminRegistration extends javax.swing.JFrame {
     private void pnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pnActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        if(fn.getText().isEmpty() || un.getText().isEmpty() || em.getText().isEmpty() ||
+                pw.getText().isEmpty() || pn.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "All fields are required.");
+        } else if(pw.getText().length() < 8){ 
+            JOptionPane.showMessageDialog(null, "Password character should be 8 and above.");
+            pw.setText("");
+        } else if(!isPhoneNumberValid(pn.getText())){
+            JOptionPane.showMessageDialog(null, "Phone number should only be contained numbers.");
+            pn.setText("");
+        } else if(UserEmailUpdateCheck()){
+            System.out.println("Duplicate Exist");
+        } else {
+            dbConnector dbc = new dbConnector();
+            dbc.updateData("UPDATE tbl_user SET user_fulname = '"+fn.getText()+"', user_username = '"+un.getText()+"', user_email = '"
+                    +em.getText()+"', user_password = '"+pw.getText()+"', user_phonenumber = '"+pn.getText()+"', user_type = '"+ut.getSelectedItem()
+                    +"',user_status = '"+us.getSelectedItem()+"'WHERE user_id = '"+id.getText()+"'");
+            userWindows uw = new userWindows();
+            uw.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_updateActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        userWindows uw = new userWindows();
+        uw.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,14 +483,15 @@ public class adminRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
-    private javax.swing.JLabel Logout;
+    public javax.swing.JButton Add;
+    private javax.swing.JButton cancel;
+    private javax.swing.JButton clear;
+    private javax.swing.JButton delete;
     public javax.swing.JTextField em;
     public javax.swing.JTextField fn;
     public javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -439,13 +503,12 @@ public class adminRegistration extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField pn;
     public javax.swing.JPasswordField pw;
+    private javax.swing.JButton refresh;
     public javax.swing.JTextField un;
+    public javax.swing.JButton update;
     public javax.swing.JComboBox<String> us;
-    private javax.swing.JTable userT;
     public javax.swing.JComboBox<String> ut;
     // End of variables declaration//GEN-END:variables
 }

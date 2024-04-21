@@ -222,7 +222,7 @@ public class Signup extends javax.swing.JFrame {
              
             }else{
                 user ads = new user();
-                ads.fulln.setText(""+fullname);
+                ads.acc_name.setText(""+fullname);
                 ads.setVisible(true);
                 ads.setLocationRelativeTo(null);
                 this.dispose();

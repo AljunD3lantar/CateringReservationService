@@ -34,7 +34,7 @@ public class adminWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        Logout = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         fullN = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -63,11 +63,11 @@ public class adminWindow extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("ADMIN WINDOW");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel8.setText("LOGOUT");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        Logout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        Logout.setText("LOGOUT");
+        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                LogoutMouseClicked(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class adminWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addComponent(Logout)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -88,7 +88,7 @@ public class adminWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel8))
+                    .addComponent(Logout))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,13 +178,15 @@ public class adminWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_usersActionPerformed
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to Logout?", "Select an Option...",
                 JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if(result == JOptionPane.YES_OPTION){
-        System.exit(0);
+        Login ads = new Login();
+        ads.setVisible(true);
+        this.dispose();
         }
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_LogoutMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session sess = Session.getInstance();
@@ -234,6 +236,7 @@ public class adminWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logout;
     public javax.swing.JLabel fullN;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -244,7 +247,6 @@ public class adminWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

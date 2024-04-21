@@ -3,6 +3,8 @@ package User;
 
 import Admin.*;
 import LoginSignup.*;
+import Settings.settings;
+import config.Session;
 import config.dbConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,18 +24,6 @@ public class user extends javax.swing.JFrame {
         initComponents();   
     }
     
-    
-    public void setUserData(String fullName, String username, String email, String phoneNumber, String userType) {
-        
-        fulln.setText(fullName);
-        usern.setText(username);
-        emails.setText(email);
-        phonenumber.setText(phoneNumber);
-        userstype.setText(userType);
-        
-    }
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,16 +33,18 @@ public class user extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Logout = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        fulln = new javax.swing.JLabel();
+        acc_name = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        usern = new javax.swing.JLabel();
-        phonenumber = new javax.swing.JLabel();
-        emails = new javax.swing.JLabel();
-        userstype = new javax.swing.JLabel();
+        Settings = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,9 +87,9 @@ public class user extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 0));
 
-        fulln.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        fulln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fulln.setText("USERS");
+        acc_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_name.setText("USERS");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
 
@@ -109,7 +101,7 @@ public class user extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
-            .addComponent(fulln, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(acc_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +109,7 @@ public class user extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fulln, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(acc_name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(304, Short.MAX_VALUE))
         );
 
@@ -125,39 +117,36 @@ public class user extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(232, 219, 76));
 
-        usern.setText("jLabel1");
+        Settings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsMouseClicked(evt);
+            }
+        });
 
-        phonenumber.setText("jLabel1");
-
-        emails.setText("jLabel1");
-
-        userstype.setText("jLabel1");
+        javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
+        Settings.setLayout(SettingsLayout);
+        SettingsLayout.setHorizontalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 52, Short.MAX_VALUE)
+        );
+        SettingsLayout.setVerticalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 52, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userstype)
-                    .addComponent(phonenumber)
-                    .addComponent(emails)
-                    .addComponent(usern))
-                .addContainerGap(354, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 418, Short.MAX_VALUE)
+                .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(usern)
-                .addGap(50, 50, 50)
-                .addComponent(emails)
-                .addGap(18, 18, 18)
-                .addComponent(phonenumber)
-                .addGap(18, 18, 18)
-                .addComponent(userstype)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 418, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 470, 470));
@@ -185,13 +174,22 @@ public class user extends javax.swing.JFrame {
         if(result == JOptionPane.YES_OPTION){  
             Login ads = new Login();
             ads.setVisible(true);
-            ads.pack();
-            ads.setLocationRelativeTo(null);
             this.dispose();
     }else{
             
         }
     }//GEN-LAST:event_LogoutMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Session sess = Session.getInstance();
+        acc_name.setText(""+sess.getFullname());
+    }//GEN-LAST:event_formWindowActivated
+
+    private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
+        settings set = new settings();
+        set.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SettingsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -233,16 +231,13 @@ public class user extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logout;
-    private javax.swing.JLabel emails;
-    public javax.swing.JLabel fulln;
+    private javax.swing.JPanel Settings;
+    public javax.swing.JLabel acc_name;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel phonenumber;
-    private javax.swing.JLabel usern;
-    private javax.swing.JLabel userstype;
     // End of variables declaration//GEN-END:variables
 }

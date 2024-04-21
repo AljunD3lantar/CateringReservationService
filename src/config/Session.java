@@ -6,6 +6,7 @@ public class Session {
     
     private static Session instance;
     private int userID;
+    private int password;
     private String fullname;
     private String username;
     private String email;
@@ -60,6 +61,14 @@ public class Session {
         this.email = email;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+    
     public String getPhonenumber() {
         return phonenumber;
     }

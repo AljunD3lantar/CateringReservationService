@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -24,6 +25,7 @@ public class userWindows extends javax.swing.JFrame {
     public userWindows() {
         initComponents();
         displayData();
+        userTable.setDefaultEditor(Object.class, null);
     }
     
     Color navicolor = new Color(255,255,0);
@@ -32,7 +34,7 @@ public class userWindows extends javax.swing.JFrame {
     public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT user_id, user_fulname, user_email FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT user_id, user_fulname, user_email, user_status FROM tbl_user");
             userTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
@@ -58,10 +60,6 @@ public class userWindows extends javax.swing.JFrame {
         Add = new javax.swing.JLabel();
         editbutton = new javax.swing.JPanel();
         Add1 = new javax.swing.JLabel();
-        deletebutton = new javax.swing.JPanel();
-        Add2 = new javax.swing.JLabel();
-        updatebutton = new javax.swing.JPanel();
-        Add3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
 
@@ -168,46 +166,6 @@ public class userWindows extends javax.swing.JFrame {
         editbutton.add(Add1);
         Add1.setBounds(30, 0, 140, 30);
 
-        deletebutton.setBackground(new java.awt.Color(255, 255, 0));
-        deletebutton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deletebuttonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deletebuttonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deletebuttonMouseExited(evt);
-            }
-        });
-        deletebutton.setLayout(null);
-
-        Add2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Add2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Add2.setText("DELETE AN ACCOUNT");
-        deletebutton.add(Add2);
-        Add2.setBounds(20, 0, 160, 30);
-
-        updatebutton.setBackground(new java.awt.Color(255, 255, 0));
-        updatebutton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                updatebuttonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                updatebuttonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                updatebuttonMouseExited(evt);
-            }
-        });
-        updatebutton.setLayout(null);
-
-        Add3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Add3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Add3.setText("UPDATE AN ACCOUNT");
-        updatebutton.add(Add3);
-        Add3.setBounds(13, 0, 170, 30);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -225,8 +183,6 @@ public class userWindows extends javax.swing.JFrame {
                         .addGap(0, 37, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))))
-            .addComponent(updatebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(deletebutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -242,11 +198,7 @@ public class userWindows extends javax.swing.JFrame {
                 .addComponent(addbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deletebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(acc_user, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(acc_id, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -267,6 +219,7 @@ public class userWindows extends javax.swing.JFrame {
 
             }
         ));
+        userTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(userTable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
@@ -324,32 +277,40 @@ public class userWindows extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addbuttonMouseClicked
 
-    private void deletebuttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletebuttonMouseEntered
-        deletebutton.setBackground(hovering);
-    }//GEN-LAST:event_deletebuttonMouseEntered
-
-    private void deletebuttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletebuttonMouseExited
-        deletebutton.setBackground(navicolor);
-    }//GEN-LAST:event_deletebuttonMouseExited
-
-    private void updatebuttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatebuttonMouseEntered
-        updatebutton.setBackground(hovering);
-    }//GEN-LAST:event_updatebuttonMouseEntered
-
-    private void updatebuttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatebuttonMouseExited
-        updatebutton.setBackground(navicolor);
-    }//GEN-LAST:event_updatebuttonMouseExited
-
-    private void updatebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatebuttonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updatebuttonMouseClicked
-
-    private void deletebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletebuttonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deletebuttonMouseClicked
-
     private void editbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editbuttonMouseClicked
-        // TODO add your handling code here:
+        int rowIndex = userTable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Select an accout to edit.");
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = userTable.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE user_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                
+                if(rs.next()){
+                adminRegistration adr = new adminRegistration();
+                adr.id.setText(""+rs.getInt("user_id"));
+                adr.fn.setText(""+rs.getString("user_fulname"));
+                adr.un.setText(""+rs.getString("user_username"));
+                adr.em.setText(""+rs.getString("user_email"));
+                adr.pw.setText(""+rs.getString("user_password"));
+                adr.pn.setText(""+rs.getString("user_phonenumber"));
+                adr.ut.setSelectedItem(""+rs.getString("user_type"));
+                adr.us.setSelectedItem(""+rs.getString("user_status"));
+                adr.Add.setEnabled(false);
+                adr.update.setEnabled(true);
+                adr.setVisible(true);
+                this.dispose();     
+               }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+            }
+        }
+        
+        TableModel tbl = userTable.getModel();
+        
+        
     }//GEN-LAST:event_editbuttonMouseClicked
 
     /**
@@ -393,13 +354,10 @@ public class userWindows extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Add;
     private javax.swing.JLabel Add1;
-    private javax.swing.JLabel Add2;
-    private javax.swing.JLabel Add3;
     private javax.swing.JLabel acc_id;
     private javax.swing.JLabel acc_user;
     private javax.swing.JPanel addbutton;
     private javax.swing.JLabel back;
-    private javax.swing.JPanel deletebutton;
     private javax.swing.JPanel editbutton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,7 +365,6 @@ public class userWindows extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel updatebutton;
     private javax.swing.JTable userTable;
     private javax.swing.JLabel user_name;
     // End of variables declaration//GEN-END:variables

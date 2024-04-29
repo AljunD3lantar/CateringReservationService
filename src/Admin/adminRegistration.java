@@ -390,7 +390,7 @@ public class adminRegistration extends javax.swing.JFrame {
             System.out.println("Duplicate Exist");
         } else {
             dbConnector dbc = new dbConnector();
-            if(dbc.insertData("INSERT INTO tbl_user ( user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
+            if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
                     + "VALUES ('"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pw.getText()+"', '"+pn.getText()+"', '"+
                     ut.getSelectedItem()+"', '"+us.getSelectedItem()+"')")){
                 JOptionPane.showMessageDialog(null, "Registered Successfully!");

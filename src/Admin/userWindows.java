@@ -34,7 +34,7 @@ public class userWindows extends javax.swing.JFrame {
     public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT user_id, user_fulname, user_email, user_status FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT user_id, user_fullname, user_email, user_status FROM tbl_user");
             userTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
@@ -291,7 +291,7 @@ public class userWindows extends javax.swing.JFrame {
                 if(rs.next()){
                 adminRegistration adr = new adminRegistration();
                 adr.id.setText(""+rs.getInt("user_id"));
-                adr.fn.setText(""+rs.getString("user_fulname"));
+                adr.fn.setText(""+rs.getString("user_fullname"));
                 adr.un.setText(""+rs.getString("user_username"));
                 adr.em.setText(""+rs.getString("user_email"));
                 adr.pw.setText(""+rs.getString("user_password"));

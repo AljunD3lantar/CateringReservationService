@@ -5,6 +5,8 @@ import Admin.*;
 import User.*;
 import config.dbConnector;
 import config.Session;
+import config.passHasher;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -21,25 +23,33 @@ public class Login extends javax.swing.JFrame {
     
      public static boolean loginAcc(String user, String pass){
         dbConnector connector = new dbConnector();
+        
         try{
-            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + user + "' AND user_password = '" + pass + "'AND user_status = 'Active'";
+            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + user + "'";
             ResultSet resultSet = connector.getData(query);
             if(resultSet.next()){
-                usertype = resultSet.getString("user_type");
-                status = resultSet.getString("user_status");
-                Session sess = Session.getInstance();
-                sess.setUserID(resultSet.getInt("user_id"));
-                sess.setFullname(resultSet.getString("user_fulname"));
-                sess.setUsername(resultSet.getString("user_username"));
-                sess.setEmail(resultSet.getString("user_email"));
-                sess.setPhonenumber(resultSet.getString("user_phonenumber"));
-                sess.setUsertype(resultSet.getString("user_type"));
-                sess.setStatus(resultSet.getString("user_status"));
+                String hashedPass = resultSet.getString("user_password");  
+                String rehashedPass = passHasher.hashPassword(pass);
+                
+                if(hashedPass.equals(rehashedPass)){
+                    usertype = resultSet.getString("user_type");
+                    status = resultSet.getString("user_status");
+                    Session sess = Session.getInstance();
+                    sess.setUserID(resultSet.getInt("user_id"));
+                    sess.setFullname(resultSet.getString("user_fullname"));
+                    sess.setUsername(resultSet.getString("user_username"));
+                    sess.setEmail(resultSet.getString("user_email"));
+                    sess.setPhonenumber(resultSet.getString("user_phonenumber"));
+                    sess.setUsertype(resultSet.getString("user_type"));
+                    sess.setStatus(resultSet.getString("user_status"));
              return true;
+              }else{
+                    return false;
+                }
             }else{
              return false;
             }
-        }catch (SQLException ex) {
+        }catch (SQLException | NoSuchAlgorithmException ex) {
             return false;
         }
 
@@ -48,7 +58,7 @@ public class Login extends javax.swing.JFrame {
     public static String getAccount(String user, String pass){
         dbConnector connector = new dbConnector();
         try{
-            String sql = "SELECT * FROM tbl_user WHERE user_username = '"+user+"'AND user_password = '"+pass+"'";
+            String sql = "SELECT * FROM tbl_user WHERE user_username = '"+user+"'";
             ResultSet resultSet = connector.getData(sql);
             if(resultSet.next()){
                 return resultSet.getString("user_type");
@@ -76,6 +86,7 @@ public class Login extends javax.swing.JFrame {
         Signup = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
         LOGIN = new javax.swing.JButton();
+        Check = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 500));
@@ -97,7 +108,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 260, 35));
 
         jLabel4.setText("Don't have an account?");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
 
         Signup.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         Signup.setText("Signup");
@@ -106,7 +117,7 @@ public class Login extends javax.swing.JFrame {
                 SignupMouseClicked(evt);
             }
         });
-        jPanel1.add(Signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 50, -1));
+        jPanel1.add(Signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 50, -1));
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +125,7 @@ public class Login extends javax.swing.JFrame {
                 ExitActionPerformed(evt);
             }
         });
-        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 70, 40));
+        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 70, 40));
 
         LOGIN.setText("LOGIN");
         LOGIN.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +133,15 @@ public class Login extends javax.swing.JFrame {
                 LOGINActionPerformed(evt);
             }
         });
-        jPanel1.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 260, 70, 40));
+        jPanel1.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 70, 40));
+
+        Check.setText("Show pass");
+        Check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +193,14 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
 
+    private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
+        if(Check.isSelected()){
+            pass.setEchoChar((char)0);
+        }else{
+            pass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_CheckActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -208,6 +235,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Check;
     private javax.swing.JButton Exit;
     private javax.swing.JButton LOGIN;
     private javax.swing.JLabel Signup;

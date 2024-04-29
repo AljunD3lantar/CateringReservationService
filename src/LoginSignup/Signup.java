@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package LoginSignup;
 
 import Admin.adminWindow;
@@ -10,6 +6,8 @@ import config.dbConnector;
 import javax.swing.JOptionPane;
 import Mainframe.*;
 import User.*;
+import config.passHasher;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -69,6 +67,7 @@ public class Signup extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         em = new javax.swing.JTextField();
+        Check = new javax.swing.JCheckBox();
         ps = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -100,6 +99,14 @@ public class Signup extends javax.swing.JFrame {
         jLabel3.setText("Password:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
         jPanel2.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 169, 30));
+
+        Check.setText("Show pass");
+        Check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, 30));
 
         ps.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,8 +178,8 @@ public class Signup extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,8 +215,13 @@ public class Signup extends javax.swing.JFrame {
         }else if(UserEmailExist()){
             System.out.println("Duplicate Exist");
         }else{
+            
         dbConnector dbc = new dbConnector();
-            if(dbc.insertData("INSERT INTO tbl_user (user_fulname, user_username, user_email, user_password, user_phonenumber, user_type, user_status) VALUES ('"+fn.getText()+"', '"+us.getText()+"', '"+em.getText()+"', '"+ps.getText()+"', '"+pn.getText()+"', '"+ut.getSelectedItem().toString()+"', 'Active')")){                                        
+        
+        try{
+        String pass = passHasher.hashPassword(ps.getText());
+        
+            if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status) VALUES ('"+fn.getText()+"', '"+us.getText()+"', '"+em.getText()+"', '"+pass+"', '"+pn.getText()+"', '"+ut.getSelectedItem().toString()+"', 'Pending')")){                                        
                 JOptionPane.showMessageDialog(null, "Registered Successfully!");
                 
             String userType = ut.getSelectedItem().toString();
@@ -230,6 +242,9 @@ public class Signup extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Connection Error!");
             }
+        }catch(NoSuchAlgorithmException ex){
+            System.out.println(""+ex);
+        }
         }
     }//GEN-LAST:event_signup1ActionPerformed
 
@@ -248,6 +263,14 @@ public class Signup extends javax.swing.JFrame {
     private void fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fnActionPerformed
+
+    private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
+        if(Check.isSelected()){
+            ps.setEchoChar((char)0);
+        }else{
+            ps.setEchoChar('*');
+        }
+    }//GEN-LAST:event_CheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +309,7 @@ public class Signup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Check;
     private javax.swing.JButton back;
     private javax.swing.JTextField em;
     private javax.swing.JTextField fn;

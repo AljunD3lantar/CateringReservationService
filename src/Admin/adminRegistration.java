@@ -190,6 +190,7 @@ public class adminRegistration extends javax.swing.JFrame {
         jLabel8.setText("UserID:");
 
         id.setAutoscrolls(false);
+        id.setEnabled(false);
 
         update.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         update.setText("UPDATE");
@@ -389,13 +390,10 @@ public class adminRegistration extends javax.swing.JFrame {
             System.out.println("Duplicate Exist");
         } else {
             dbConnector dbc = new dbConnector();
-            if(dbc.insertData("INSERT INTO tbl_user (user_id, user_fulname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
-                    + "VALUES ('"+id.getText()+"', '"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pw.getText()+"', '"+pn.getText()+"', '"+
-                    ut.getSelectedItem().toString()+"', 'Active')")){
+            if(dbc.insertData("INSERT INTO tbl_user ( user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
+                    + "VALUES ('"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pw.getText()+"', '"+pn.getText()+"', '"+
+                    ut.getSelectedItem()+"', '"+us.getSelectedItem()+"')")){
                 JOptionPane.showMessageDialog(null, "Registered Successfully!");
-                user ads = new user();
-                ads.setVisible(true);
-                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Connection Error!");
             }
@@ -420,7 +418,7 @@ public class adminRegistration extends javax.swing.JFrame {
             System.out.println("Duplicate Exist");
         } else {
             dbConnector dbc = new dbConnector();
-            dbc.updateData("UPDATE tbl_user SET user_fulname = '"+fn.getText()+"', user_username = '"+un.getText()+"', user_email = '"
+            dbc.updateData("UPDATE tbl_user SET user_fullname = '"+fn.getText()+"', user_username = '"+un.getText()+"', user_email = '"
                     +em.getText()+"', user_password = '"+pw.getText()+"', user_phonenumber = '"+pn.getText()+"', user_type = '"+ut.getSelectedItem()
                     +"',user_status = '"+us.getSelectedItem()+"'WHERE user_id = '"+id.getText()+"'");
             userWindows uw = new userWindows();

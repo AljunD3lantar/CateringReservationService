@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/Admin/userWindows.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/LoginSignup/Signup.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/Admin/adminRegistration.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/Admin/adminWindow.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/config/Session.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/LoginSignup/Login.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/config/dbConnector.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/User/user.java</file>
-            <file>file:/C:/Users/SCC/Documents/NetBeansProjects/CateringService/t/src/SettingsContent/changepass.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/FoodMenu.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/User/user.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/LoginSignup/Login.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/SettingsContent/changepass.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/CateringServices.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Settings/Settings.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/CateringPackages.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/Venues.java</file>
         </group>
     </open-files>
 </project-private>

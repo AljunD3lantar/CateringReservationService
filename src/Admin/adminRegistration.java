@@ -1,13 +1,11 @@
 
 package Admin;
 
-import User.user;
 import config.dbConnector;
 import Admin.userWindows;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
 
 
 
@@ -85,6 +83,18 @@ public class adminRegistration extends javax.swing.JFrame {
         }
         
     }
+     
+     private void clearFields(){
+         
+         fn.setText("");
+         un.setText("");
+         em.setText("");
+         pw.setText("");
+         pn.setText("");
+         ut.setSelectedIndex(0);
+         us.setSelectedIndex(0);
+         
+     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -428,7 +438,24 @@ public class adminRegistration extends javax.swing.JFrame {
     }//GEN-LAST:event_updateActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this account?","Confirmation",JOptionPane.YES_OPTION);
+        if(confirmation == JOptionPane.YES_OPTION){
+            if(id.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Please select an account to delete.");
+            }else{
+                try{
+                    int userID = Integer.parseInt(id.getText());
+                    dbConnector dbc = new dbConnector();
+                    dbc.deleteAccount(userID);
+                    clearFields();
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Invalid user ID");
+                }
+            }
+            userWindows ads = new userWindows();
+            ads.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_deleteActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
@@ -484,7 +511,7 @@ public class adminRegistration extends javax.swing.JFrame {
     public javax.swing.JButton Add;
     private javax.swing.JButton cancel;
     private javax.swing.JButton clear;
-    private javax.swing.JButton delete;
+    public javax.swing.JButton delete;
     public javax.swing.JTextField em;
     public javax.swing.JTextField fn;
     public javax.swing.JTextField id;

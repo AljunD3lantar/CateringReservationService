@@ -8,8 +8,6 @@ package Admin;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -300,6 +298,7 @@ public class userWindows extends javax.swing.JFrame {
                 adr.us.setSelectedItem(""+rs.getString("user_status"));
                 adr.Add.setEnabled(false);
                 adr.update.setEnabled(true);
+                adr.delete.setEnabled(false);
                 adr.setVisible(true);
                 this.dispose();     
                }

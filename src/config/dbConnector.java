@@ -58,4 +58,24 @@ public class dbConnector {
             }
         
         }
+    
+    public void deleteAccount(int userID){
+        
+        try{
+            Statement stmt = connect.createStatement();
+            
+            String query = "DELETE FROM tbl_user WHERE user_id = " + userID;
+            int rowsAffected = stmt.executeUpdate(query);
+            stmt.close();
+            
+            if(rowsAffected > 0){
+                System.out.println("Account Deleted Successfully!");
+            }else{
+                System.out.println("No account or user found with ID: " + userID);
+            }
+        }catch (SQLException e){
+            System.out.println("Error deleting an account." + e.getMessage());
+        }
+        
+    }
 }

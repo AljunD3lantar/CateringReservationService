@@ -2,7 +2,7 @@
 package SettingsContent;
 
 import LoginSignup.Login;
-import Settings.settings;
+import Settings.Settings;
 import config.Session;
 import config.dbConnector;
 import config.passHasher;
@@ -10,7 +10,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
@@ -136,41 +135,48 @@ public class changepass extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         
-     try{
-        dbConnector dbc = new dbConnector();
-        Session sess = Session.getInstance();
+     try {
+    dbConnector dbc = new dbConnector();
+    Session sess = Session.getInstance();
+    
+    String query = "SELECT * FROM tbl_user WHERE user_id = '"+ sess.getUserID()+"'";
+    ResultSet rs = dbc.getData(query);
+    if(rs.next()){
+        String oldpassword = rs.getString("user_password");
+        String oldhash = passHasher.hashPassword(oldPass.getText());
         
-        String query = "SELECT * FROM tbl_user WHERE user_id = '"+ sess.getUserID()+"'";
-        ResultSet rs = dbc.getData(query);
-        if(rs.next()){
-           String oldpassword = rs.getString("user_password");
-           String oldhash = passHasher.hashPassword(oldPass.getText());
-           
-           if(oldpassword.equals(oldhash)){
-               String newpass = passHasher.hashPassword(newPass.getText());
-               dbc.insertData("UPDATE tbl_user SET user_password = '"+newpass+"'");
-               JOptionPane.showMessageDialog(null, "Password Changed Successfully!");
-               Login ads = new Login();
-               ads.setVisible(true);
-               this.dispose();
-               
-           }else{
-               JOptionPane.showMessageDialog(null, "Old Password is incorrect!");
-           }
-           
+        if(oldpassword.equals(oldhash)){
+            String newpass = passHasher.hashPassword(newPass.getText());
+            
+            // Check if new password matches confirm password
+            if(newpass.equals(passHasher.hashPassword(conNewPass.getText()))) {
+                // If matched, update the password
+                dbc.insertData("UPDATE tbl_user SET user_password = '"+newpass+"'");
+                JOptionPane.showMessageDialog(null, "Password Changed Successfully!");
+                Login ads = new Login();
+                ads.setVisible(true);
+                this.dispose();
+            } else {
+                // If not matched, show error message
+                JOptionPane.showMessageDialog(null, "New Password and Confirm Password do not match!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Old Password is incorrect!");
         }
-        
-     }catch(SQLException | NoSuchAlgorithmException ex){
-         System.out.println(""+ex);
-     }
+    }
+} catch(SQLException | NoSuchAlgorithmException ex){
+    System.out.println(""+ex);
+}
+
     }//GEN-LAST:event_SaveActionPerformed
 
     private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
-       settings set = new settings();
+       Settings set = new Settings();
        set.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_BackMouseClicked

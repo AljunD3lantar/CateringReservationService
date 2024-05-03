@@ -4,7 +4,6 @@ package LoginSignup;
 import Admin.adminWindow;
 import config.dbConnector;
 import javax.swing.JOptionPane;
-import Mainframe.*;
 import User.*;
 import config.passHasher;
 import java.security.NoSuchAlgorithmException;
@@ -57,6 +56,15 @@ public class Signup extends javax.swing.JFrame {
         }
         
     }
+
+    public boolean isPhoneNumberValid(String phoneNumber) {
+    for (char c : phoneNumber.toCharArray()) {
+        if (!Character.isDigit(c)) {
+            return false; 
+        }
+    }
+    return true;
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -193,14 +201,6 @@ public class Signup extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean isPhoneNumberValid(String phoneNumber) {
-    for (char c : phoneNumber.toCharArray()) {
-        if (!Character.isDigit(c)) {
-            return false; 
-        }
-    }
-    return true;
-}
     
     private void signup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signup1ActionPerformed
         if(fn.getText().isEmpty() || us.getText().isEmpty() || em.getText().isEmpty() ||
@@ -233,10 +233,8 @@ public class Signup extends javax.swing.JFrame {
                 this.dispose();
              
             }else{
-                user ads = new user();
-                ads.acc_name.setText(""+fullname);
+                Login ads = new Login();
                 ads.setVisible(true);
-                ads.setLocationRelativeTo(null);
                 this.dispose();
               }
             }else{

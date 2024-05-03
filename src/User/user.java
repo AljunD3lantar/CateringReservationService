@@ -1,42 +1,46 @@
-
 package User;
 
-import Admin.*;
-import LoginSignup.*;
-import Settings.settings;
+import Mainframe.HomePage;
 import config.Session;
-import config.dbConnector;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
+import Settings.Settings;
+import SettingsContent.changepass;
+import java.awt.Color;
 
-/**
- *
- * @author SCC
- */
 public class user extends javax.swing.JFrame {
 
-    /**
-     * Creates new form adminWindow
-     */
     public user() {
         initComponents();   
     }
+    
+    Color navicolor = new Color(255,255,0);
+    Color hovering = new Color(240,240,240);
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        Logout = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        acc_name = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        Settings = new javax.swing.JPanel();
+        homebutton = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        CPbutton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        acc_contact = new javax.swing.JTextField();
+        acc_name = new javax.swing.JTextField();
+        acc_username = new javax.swing.JTextField();
+        acc_email = new javax.swing.JTextField();
+        acc_pass = new javax.swing.JPasswordField();
+
+        jLabel6.setText("Username:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -52,15 +56,7 @@ public class user extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 102));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("USERS PAGE");
-
-        Logout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        Logout.setText("LOGOUT");
-        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutMouseClicked(evt);
-            }
-        });
+        jLabel2.setText("USERS PERSONAL INFO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -69,29 +65,54 @@ public class user extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
-                .addComponent(Logout)
-                .addContainerGap())
+                .addContainerGap(394, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Logout))
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 50));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 0));
 
-        acc_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_name.setText("USERS");
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
+
+        homebutton.setBackground(new java.awt.Color(255, 255, 0));
+        homebutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homebuttonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                homebuttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                homebuttonMouseExited(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        jLabel1.setText("HOME");
+
+        javax.swing.GroupLayout homebuttonLayout = new javax.swing.GroupLayout(homebutton);
+        homebutton.setLayout(homebuttonLayout);
+        homebuttonLayout.setHorizontalGroup(
+            homebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homebuttonLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        homebuttonLayout.setVerticalGroup(
+            homebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homebuttonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -101,55 +122,60 @@ public class user extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
-            .addComponent(acc_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(homebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(acc_name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(homebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 470));
 
-        jPanel4.setBackground(new java.awt.Color(232, 219, 76));
+        jLabel4.setText("Contact:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 50, -1));
 
-        Settings.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SettingsMouseClicked(evt);
+        jLabel5.setText("Full Name:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+
+        jLabel7.setText("Username:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+
+        jLabel8.setText("Email:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 50, -1));
+
+        jLabel9.setText("Password:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 50, -1));
+
+        CPbutton.setText("Change Password");
+        CPbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CPbuttonActionPerformed(evt);
             }
         });
+        jPanel1.add(CPbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, 40));
 
-        javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
-        Settings.setLayout(SettingsLayout);
-        SettingsLayout.setHorizontalGroup(
-            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 52, Short.MAX_VALUE)
-        );
-        SettingsLayout.setVerticalGroup(
-            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 52, Short.MAX_VALUE)
-        );
+        jLabel10.setText("Do you want to change Password?");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 418, Short.MAX_VALUE)
-                .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 418, Short.MAX_VALUE))
-        );
+        acc_contact.setEditable(false);
+        jPanel1.add(acc_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 220, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 470, 470));
+        acc_name.setEditable(false);
+        jPanel1.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 220, 30));
+
+        acc_username.setEditable(false);
+        jPanel1.add(acc_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 220, 30));
+
+        acc_email.setEditable(false);
+        jPanel1.add(acc_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 220, 30));
+
+        acc_pass.setEditable(false);
+        jPanel1.add(acc_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 220, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,28 +194,34 @@ public class user extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
-        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to Logout?","Select an option...", JOptionPane.YES_OPTION
-        ,JOptionPane.ERROR_MESSAGE);
-        if(result == JOptionPane.YES_OPTION){  
-            Login ads = new Login();
-            ads.setVisible(true);
-            this.dispose();
-    }else{
-            
-        }
-    }//GEN-LAST:event_LogoutMouseClicked
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session sess = Session.getInstance();
         acc_name.setText(""+sess.getFullname());
+        acc_username.setText(""+sess.getUsername());
+        acc_email.setText(""+sess.getEmail());
+        acc_pass.setText(""+sess.getPassword());
+        acc_contact.setText(""+sess.getPhonenumber());
     }//GEN-LAST:event_formWindowActivated
 
-    private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
-        settings set = new settings();
-        set.setVisible(true);
+    private void homebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homebuttonMouseClicked
+        HomePage ads = new HomePage();
+        ads.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_SettingsMouseClicked
+    }//GEN-LAST:event_homebuttonMouseClicked
+
+    private void homebuttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homebuttonMouseEntered
+        homebutton.setBackground(hovering);
+    }//GEN-LAST:event_homebuttonMouseEntered
+
+    private void homebuttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homebuttonMouseExited
+        homebutton.setBackground(navicolor);
+    }//GEN-LAST:event_homebuttonMouseExited
+
+    private void CPbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPbuttonActionPerformed
+        changepass CP = new changepass();
+        CP.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CPbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,14 +262,25 @@ public class user extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Logout;
-    private javax.swing.JPanel Settings;
-    public javax.swing.JLabel acc_name;
+    private javax.swing.JButton CPbutton;
+    private javax.swing.JTextField acc_contact;
+    private javax.swing.JTextField acc_email;
+    private javax.swing.JTextField acc_name;
+    private javax.swing.JPasswordField acc_pass;
+    private javax.swing.JTextField acc_username;
+    private javax.swing.JPanel homebutton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@
 package LoginSignup;
 
 import Admin.*;
+import Mainframe.HomePage;
 import User.*;
 import config.dbConnector;
 import config.Session;
@@ -9,6 +10,7 @@ import config.passHasher;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -55,6 +57,7 @@ public class Login extends javax.swing.JFrame {
 
     }
     
+    //Get account from the database
     public static String getAccount(String user, String pass){
         dbConnector connector = new dbConnector();
         try{
@@ -161,7 +164,7 @@ public class Login extends javax.swing.JFrame {
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
         if(loginAcc(user.getText(),pass.getText())){
             String user_type = getAccount(user.getText(),pass.getText()); 
-
+            
             if (user_type.equals("Admin")) {
                 JOptionPane.showMessageDialog(null,"Admin Login Success!");
                 adminWindow ads = new adminWindow();
@@ -169,7 +172,7 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
             } else if (user_type.equals("User")) {
                 JOptionPane.showMessageDialog(null,"User Login Success!");
-                user ads = new user();
+                HomePage ads = new HomePage();
                 ads.setVisible(true);
                 this.dispose();
             } else {

@@ -3,6 +3,7 @@ package Admin;
 
 import config.dbConnector;
 import Admin.userWindows;
+import config.passHasher;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -400,13 +401,19 @@ public class adminRegistration extends javax.swing.JFrame {
             System.out.println("Duplicate Exist");
         } else {
             dbConnector dbc = new dbConnector();
-            if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
-                    + "VALUES ('"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pw.getText()+"', '"+pn.getText()+"', '"+
-                    ut.getSelectedItem()+"', '"+us.getSelectedItem()+"')")){
-                JOptionPane.showMessageDialog(null, "Registered Successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Connection Error!");
-            }
+                try {
+                    String pass = passHasher.hashPassword(pw.getText());
+                    if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status)"
+                            + "VALUES ('"+fn.getText()+"', '"+un.getText()+"', '"+em.getText()+"', '"+pass+"', '"+pn.getText()+"', '"+
+                            ut.getSelectedItem()+"', '"+us.getSelectedItem()+"')")){
+                        JOptionPane.showMessageDialog(null, "Registered Successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Connection Error!");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error occurred while registering. Please try again later.");
+                    e.printStackTrace(); // Print the stack trace for debugging purposes
+                }
         }
     }//GEN-LAST:event_AddActionPerformed
 
@@ -428,12 +435,18 @@ public class adminRegistration extends javax.swing.JFrame {
             System.out.println("Duplicate Exist");
         } else {
             dbConnector dbc = new dbConnector();
-            dbc.updateData("UPDATE tbl_user SET user_fullname = '"+fn.getText()+"', user_username = '"+un.getText()+"', user_email = '"
-                    +em.getText()+"', user_password = '"+pw.getText()+"', user_phonenumber = '"+pn.getText()+"', user_type = '"+ut.getSelectedItem()
-                    +"',user_status = '"+us.getSelectedItem()+"'WHERE user_id = '"+id.getText()+"'");
-            userWindows uw = new userWindows();
-            uw.setVisible(true);
-            this.dispose();
+            try {
+                String pass = passHasher.hashPassword(pw.getText());
+                dbc.updateData("UPDATE tbl_user SET user_fullname = '"+fn.getText()+"', user_username = '"+un.getText()+"', user_email = '"
+                        +em.getText()+"', user_password = '"+pass+"', user_phonenumber = '"+pn.getText()+"', user_type = '"+ut.getSelectedItem()
+                        +"',user_status = '"+us.getSelectedItem()+"'WHERE user_id = '"+id.getText()+"'");
+                userWindows uw = new userWindows();
+                uw.setVisible(true);
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "An error occurred while updating user information. Please try again later.");
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_updateActionPerformed
 

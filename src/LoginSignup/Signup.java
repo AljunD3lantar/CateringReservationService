@@ -76,7 +76,7 @@ public class Signup extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         em = new javax.swing.JTextField();
         Check = new javax.swing.JCheckBox();
-        ps = new javax.swing.JPasswordField();
+        pw = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         us = new javax.swing.JTextField();
@@ -116,12 +116,12 @@ public class Signup extends javax.swing.JFrame {
         });
         jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, 30));
 
-        ps.addActionListener(new java.awt.event.ActionListener() {
+        pw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                psActionPerformed(evt);
+                pwActionPerformed(evt);
             }
         });
-        jPanel2.add(ps, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 171, 30));
+        jPanel2.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 171, 30));
 
         jLabel5.setText("UserType");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
@@ -204,11 +204,11 @@ public class Signup extends javax.swing.JFrame {
     
     private void signup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signup1ActionPerformed
         if(fn.getText().isEmpty() || us.getText().isEmpty() || em.getText().isEmpty() ||
-                ps.getText().isEmpty() || pn.getText().isEmpty()){
+                pw.getText().isEmpty() || pn.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "All fields are required.");
-        }else if(ps.getText().length() < 8){ 
+        }else if(pw.getText().length() < 8){ 
             JOptionPane.showMessageDialog(null, "Password character should be 8 and above.");
-            ps.setText("");
+            pw.setText("");
         }else if(!isPhoneNumberValid(pn.getText())){
             JOptionPane.showMessageDialog(null, "Phone number should only be contained numbers.");
             pn.setText("");
@@ -219,7 +219,7 @@ public class Signup extends javax.swing.JFrame {
         dbConnector dbc = new dbConnector();
         
         try{
-        String pass = passHasher.hashPassword(ps.getText());
+        String pass = passHasher.hashPassword(pw.getText());
         
             if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status) VALUES ('"+fn.getText()+"', '"+us.getText()+"', '"+em.getText()+"', '"+pass+"', '"+pn.getText()+"', '"+ut.getSelectedItem().toString()+"', 'Pending')")){                                        
                 JOptionPane.showMessageDialog(null, "Registered Successfully!");
@@ -254,9 +254,9 @@ public class Signup extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void psActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psActionPerformed
+    private void pwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_psActionPerformed
+    }//GEN-LAST:event_pwActionPerformed
 
     private void fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnActionPerformed
         // TODO add your handling code here:
@@ -264,9 +264,9 @@ public class Signup extends javax.swing.JFrame {
 
     private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
         if(Check.isSelected()){
-            ps.setEchoChar((char)0);
+            pw.setEchoChar((char)0);
         }else{
-            ps.setEchoChar('*');
+            pw.setEchoChar('*');
         }
     }//GEN-LAST:event_CheckActionPerformed
 
@@ -322,7 +322,7 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField pn;
-    private javax.swing.JPasswordField ps;
+    private javax.swing.JPasswordField pw;
     private javax.swing.JButton signup1;
     private javax.swing.JTextField us;
     private javax.swing.JComboBox<String> ut;

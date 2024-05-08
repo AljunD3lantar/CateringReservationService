@@ -298,7 +298,6 @@ public class userWindows extends javax.swing.JFrame {
                 adr.us.setSelectedItem(""+rs.getString("user_status"));
                 adr.Add.setEnabled(false);
                 adr.update.setEnabled(true);
-                adr.delete.setEnabled(false);
                 adr.setVisible(true);
                 this.dispose();     
                }

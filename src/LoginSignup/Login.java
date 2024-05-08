@@ -163,8 +163,10 @@ public class Login extends javax.swing.JFrame {
 
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
         if(loginAcc(user.getText(),pass.getText())){
-            String user_type = getAccount(user.getText(),pass.getText()); 
-            
+        String user_type = getAccount(user.getText(),pass.getText()); 
+
+        if(!status.equals("Pending")){
+
             if (user_type.equals("Admin")) {
                 JOptionPane.showMessageDialog(null,"Admin Login Success!");
                 adminWindow ads = new adminWindow();
@@ -180,8 +182,13 @@ public class Login extends javax.swing.JFrame {
                 return;
             }
         } else {
-            JOptionPane.showMessageDialog(null,"Login Failed!");
+            JOptionPane.showMessageDialog(null,"Sorry, your account is pending. Please contact the administrator to change your status."); // Message for pending status
+            return;
         }
+    } else {
+        JOptionPane.showMessageDialog(null,"Login Failed!");
+    }
+        
     }//GEN-LAST:event_LOGINActionPerformed
 
     private void SignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignupMouseClicked

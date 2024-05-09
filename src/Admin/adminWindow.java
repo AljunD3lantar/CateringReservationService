@@ -6,6 +6,7 @@
 package Admin;
 
 import LoginSignup.Login;
+import ReceiptMaker.receiptmaker;
 import config.Session;
 import javax.swing.JOptionPane;
 
@@ -38,14 +39,10 @@ public class adminWindow extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         fullN = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         users = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        customerReceipt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -124,9 +121,6 @@ public class adminWindow extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 470));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reviews-100.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 100, 100));
-
         users.setText("USERS");
         users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,23 +129,19 @@ public class adminWindow extends javax.swing.JFrame {
         });
         jPanel1.add(users, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, 40));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-catering-100.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 100, 90));
-
-        jButton2.setText("Catering Services");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 130, 40));
-
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 100, 100));
-
-        jButton3.setText("Reviews");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, 40));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 100, 100));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, 100));
 
-        jButton4.setText("Food Menu");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, 40));
+        customerReceipt.setText("Make a Receipt");
+        customerReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerReceiptActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customerReceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,6 +190,12 @@ public class adminWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    private void customerReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerReceiptActionPerformed
+           receiptmaker rm = new receiptmaker();
+           rm.setVisible(true);
+           this.dispose();
+    }//GEN-LAST:event_customerReceiptActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,14 +233,10 @@ public class adminWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logout;
+    private javax.swing.JButton customerReceipt;
     public javax.swing.JLabel fullN;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;

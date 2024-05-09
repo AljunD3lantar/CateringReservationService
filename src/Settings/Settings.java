@@ -5,7 +5,10 @@
  */
 package Settings;
 
-import MainframeContent.*;
+import Mainframe.Venues;
+import Mainframe.FoodMenu;
+import Mainframe.CateringServices;
+import Mainframe.CateringPackages;
 import User.user;
 import config.Session;
 import java.awt.Color;

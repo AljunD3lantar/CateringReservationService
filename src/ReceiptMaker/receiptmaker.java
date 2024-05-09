@@ -45,24 +45,24 @@ public class receiptmaker extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
         jPanel1.add(fulnames, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 240, 30));
 
-        jLabel2.setText("Date of Event:");
+        jLabel2.setText("Time of Event:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
         jPanel1.add(dates, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 240, 30));
 
         jLabel3.setText("Payment Method:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jLabel4.setText("Location");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
         jPanel1.add(locations, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 240, 30));
-        jPanel1.add(numattend, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 240, 30));
+        jPanel1.add(numattend, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 240, 30));
 
         jLabel7.setText("Number of Attendees:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jLabel8.setText("Payment:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
-        jPanel1.add(payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 240, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jPanel1.add(payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 240, 30));
 
         reset.setText("Reset");
         reset.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +70,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 resetActionPerformed(evt);
             }
         });
-        jPanel1.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 70, 40));
+        jPanel1.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 70, 40));
 
         printreceipt.setText("Print Receipt");
         printreceipt.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 printreceiptActionPerformed(evt);
             }
         });
-        jPanel1.add(printreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, -1, 40));
+        jPanel1.add(printreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, 40));
 
         genreceipt.setText("Generate Receipt");
         genreceipt.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +86,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 genreceiptActionPerformed(evt);
             }
         });
-        jPanel1.add(genreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, 40));
+        jPanel1.add(genreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, 40));
 
         CustomerReceipt.setEditable(false);
         CustomerReceipt.setColumns(20);
@@ -101,17 +101,17 @@ public class receiptmaker extends javax.swing.JFrame {
         jPanel1.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 240, 30));
 
         paymeth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Type of Payment", "COD", "GCash", "BPI", "BPO", "Pay Maya", "" }));
-        jPanel1.add(paymeth, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 240, 30));
+        jPanel1.add(paymeth, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 240, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
         );
 
         pack();
@@ -132,11 +132,19 @@ public class receiptmaker extends javax.swing.JFrame {
         CustomerReceipt.setText(CustomerReceipt.getText() + "Customers Fullname: " + fulnames.getText()+"\n");
         CustomerReceipt.setText(CustomerReceipt.getText() + "Date of Event: " + dates.getText()+"\n");
         CustomerReceipt.setText(CustomerReceipt.getText() + "Time of Event: " + time.getText()+"\n");
+        CustomerReceipt.setText(CustomerReceipt.getText() + "Number of Attendees: " + numattend.getText()+"\n");
         CustomerReceipt.setText(CustomerReceipt.getText() + "Location: " + locations.getText()+"\n");
         CustomerReceipt.setText(CustomerReceipt.getText() + "Payment Method: " + paymeth.getSelectedItem().toString()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Payment: " + payment.getText()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Number of Attendees: " + numattend.getText()+"\n");
+        CustomerReceipt.setText(CustomerReceipt.getText() + "Payment: " + payment.getText()+"\n\n");
+        
+        
+        CustomerReceipt.setText(CustomerReceipt.getText() + "****************************************\n");
+        CustomerReceipt.setText(CustomerReceipt.getText() + "\t THANK YOU FOR CHOOSING \t\n");
+        CustomerReceipt.setText(CustomerReceipt.getText() + "   ALMA'S CATERING RESERVATION SERVICES\n");
+        CustomerReceipt.setText(CustomerReceipt.getText() + "****************************************\n");
+        
         System.out.println("Customer Information Filled!");
+        
     }//GEN-LAST:event_genreceiptActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed

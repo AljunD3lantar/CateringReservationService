@@ -7,7 +7,6 @@ package Mainframe;
 
 import Settings.Settings;
 import java.awt.Color;
-import MainframeContent.*;
 
 
 public class HomePage extends javax.swing.JFrame {

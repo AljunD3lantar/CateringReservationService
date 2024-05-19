@@ -1,5 +1,10 @@
 package Mainframe;
 
+<<<<<<< HEAD
+=======
+import Mainframe.CateringPackages;
+import Mainframe.HomePage;
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 import Settings.Settings;
 import java.awt.Color;
 
@@ -537,6 +542,10 @@ public class CateringServices extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+<<<<<<< HEAD
+=======
+    private javax.swing.JLabel jLabel6;
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

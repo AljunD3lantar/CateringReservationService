@@ -6,6 +6,7 @@
 package Admin;
 
 import LoginSignup.Login;
+import ReceiptMaker.receiptmaker;
 import config.Session;
 import javax.swing.JOptionPane;
 
@@ -30,14 +31,18 @@ public class adminWindow extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         fullN = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         users = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+<<<<<<< HEAD
         reserve = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         Schedule = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         Foodmenu = new javax.swing.JButton();
+=======
+        jLabel7 = new javax.swing.JLabel();
+        customerReceipt = new javax.swing.JButton();
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -116,9 +121,12 @@ public class adminWindow extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 470));
 
+<<<<<<< HEAD
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reviews-100.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 100, 100));
 
+=======
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
         users.setText("USERS");
         users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +136,7 @@ public class adminWindow extends javax.swing.JFrame {
         jPanel1.add(users, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, 40));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
+<<<<<<< HEAD
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 100, 100));
 
         reserve.setText("Reserve");
@@ -137,10 +146,14 @@ public class adminWindow extends javax.swing.JFrame {
             }
         });
         jPanel1.add(reserve, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, -1, 40));
+=======
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 100, 100));
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-100.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, 100));
 
+<<<<<<< HEAD
         Schedule.setText("Schedule");
         Schedule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +172,15 @@ public class adminWindow extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Foodmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 100, 40));
+=======
+        customerReceipt.setText("Make a Receipt");
+        customerReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerReceiptActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customerReceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, 40));
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +229,7 @@ public class adminWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+<<<<<<< HEAD
     private void reserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveActionPerformed
         customerReservation cr = new customerReservation();
         cr.setVisible(true);
@@ -222,6 +245,17 @@ public class adminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_FoodmenuActionPerformed
 
     
+=======
+    private void customerReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerReceiptActionPerformed
+           receiptmaker rm = new receiptmaker();
+           rm.setVisible(true);
+           this.dispose();
+    }//GEN-LAST:event_customerReceiptActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -257,11 +291,18 @@ public class adminWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Foodmenu;
     private javax.swing.JLabel Logout;
+<<<<<<< HEAD
     private javax.swing.JButton Schedule;
     public javax.swing.JLabel fullN;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+=======
+    private javax.swing.JButton customerReceipt;
+    public javax.swing.JLabel fullN;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

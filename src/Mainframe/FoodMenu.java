@@ -1,6 +1,13 @@
 package Mainframe;
+<<<<<<< HEAD
 
 
+=======
+
+import Mainframe.CateringServices;
+import Mainframe.CateringPackages;
+import Mainframe.HomePage;
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 import Settings.Settings;
 import java.awt.Color;
 

@@ -1,8 +1,13 @@
 
 package Settings;
 
+<<<<<<< HEAD
 import Mainframe.FoodMenu;
 import Mainframe.HomePage;
+=======
+import Mainframe.Venues;
+import Mainframe.FoodMenu;
+>>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
 import Mainframe.CateringServices;
 import Mainframe.CateringPackages;
 import User.user;

@@ -23,57 +23,92 @@ public class Login extends javax.swing.JFrame {
     static String usertype;
     static String status;
     
-     public static boolean loginAcc(String user, String pass){
-        dbConnector connector = new dbConnector();
+     public static boolean loginAcc(String username, String password) {
+    dbConnector connector = new dbConnector();
+    
+    try {
         
-        try{
-            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + user + "'";
-            ResultSet resultSet = connector.getData(query);
-            if(resultSet.next()){
-                String hashedPass = resultSet.getString("user_password");  
-                String rehashedPass = passHasher.hashPassword(pass);
-                
-                if(hashedPass.equals(rehashedPass)){
-                    usertype = resultSet.getString("user_type");
-                    status = resultSet.getString("user_status");
-                    Session sess = Session.getInstance();
-                    sess.setUserID(resultSet.getInt("user_id"));
-                    sess.setFullname(resultSet.getString("user_fullname"));
-                    sess.setUsername(resultSet.getString("user_username"));
-                    sess.setEmail(resultSet.getString("user_email"));
-                    sess.setPhonenumber(resultSet.getString("user_phonenumber"));
-                    sess.setUsertype(resultSet.getString("user_type"));
-                    sess.setStatus(resultSet.getString("user_status"));
-             return true;
-              }else{
-                    return false;
-                }
-            }else{
-             return false;
+        String adminQuery = "SELECT * FROM tbl_admin WHERE admin_username = '" + username + "'";
+        ResultSet adminResultSet = connector.getData(adminQuery);
+        
+        if (adminResultSet.next()) {
+            String hashedPass = adminResultSet.getString("admin_password");  
+            String rehashedPass = passHasher.hashPassword(password);
+            
+            if (hashedPass.equals(rehashedPass)) {
+                usertype = "Admin";
+                status = adminResultSet.getString("admin_status");
+                Session sess = Session.getInstance();
+                sess.setUserID(adminResultSet.getInt("admin_id"));
+                sess.setFullname(adminResultSet.getString("admin_name"));
+                sess.setUsername(adminResultSet.getString("admin_username"));
+                sess.setEmail(adminResultSet.getString("admin_email"));
+                sess.setPhonenumber(adminResultSet.getString("admin_phonenumber"));
+                sess.setUsertype("Admin");
+                sess.setStatus(adminResultSet.getString("admin_status"));
+                return true;
+            } else {
+                return false;
             }
-        }catch (SQLException | NoSuchAlgorithmException ex) {
-            return false;
         }
-
+        
+        String userQuery = "SELECT * FROM tbl_user WHERE user_username = '" + username + "'";
+        ResultSet userResultSet = connector.getData(userQuery);
+        
+        if (userResultSet.next()) {
+            String hashedPass = userResultSet.getString("user_password");  
+            String rehashedPass = passHasher.hashPassword(password);
+            
+            if (hashedPass.equals(rehashedPass)) {
+                usertype = userResultSet.getString("user_type");
+                status = userResultSet.getString("user_status");
+                Session sess = Session.getInstance();
+                sess.setUserID(userResultSet.getInt("user_id"));
+                sess.setFullname(userResultSet.getString("user_fullname"));
+                sess.setUsername(userResultSet.getString("user_username"));
+                sess.setEmail(userResultSet.getString("user_email"));
+                sess.setPhonenumber(userResultSet.getString("user_phonenumber"));
+                sess.setUsertype(userResultSet.getString("user_type"));
+                sess.setStatus(userResultSet.getString("user_status"));
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        return false;
+    } catch (SQLException | NoSuchAlgorithmException ex) {
+        System.out.println("" + ex);
+        return false;
     }
+}
+
     
     //Get account from the database
-    public static String getAccount(String user, String pass){
+    public static String getAccount(String username, String password) {
         dbConnector connector = new dbConnector();
-        try{
-            String sql = "SELECT * FROM tbl_user WHERE user_username = '"+user+"'";
-            ResultSet resultSet = connector.getData(sql);
-            if(resultSet.next()){
-                return resultSet.getString("user_type");
-            }else{
+            try {
+                
+                String adminQuery = "SELECT * FROM tbl_admin WHERE admin_username = '" + username + "'";
+                ResultSet adminResultSet = connector.getData(adminQuery);
+                if (adminResultSet.next()) {
+                    return "Admin";
+                    
+                }
+
+                    String userQuery = "SELECT * FROM tbl_user WHERE user_username = '" + username + "'";
+                    ResultSet userResultSet = connector.getData(userQuery);
+                    if (userResultSet.next()) {
+                        return userResultSet.getString("user_type");
+                    }
+
                 return null;
-            }
-            
-        }catch(SQLException ex){
-            System.out.println(""+ex);
-            return null;
-        }
+            } catch (SQLException ex) {
+                System.out.println("" + ex);
+                return null;
     }
+}
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -100,18 +135,18 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("LOGIN");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
 
         jLabel2.setText("Password:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         jLabel3.setText("Username:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 260, 35));
-        jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 260, 35));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 260, 35));
+        jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 260, 35));
 
         jLabel4.setText("Don't have an account?");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
 
         Signup.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         Signup.setText("Signup");
@@ -120,7 +155,7 @@ public class Login extends javax.swing.JFrame {
                 SignupMouseClicked(evt);
             }
         });
-        jPanel1.add(Signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 50, -1));
+        jPanel1.add(Signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 50, -1));
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +163,7 @@ public class Login extends javax.swing.JFrame {
                 ExitActionPerformed(evt);
             }
         });
-        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 70, 40));
+        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 70, 40));
 
         LOGIN.setText("LOGIN");
         LOGIN.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +171,7 @@ public class Login extends javax.swing.JFrame {
                 LOGINActionPerformed(evt);
             }
         });
-        jPanel1.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 70, 40));
+        jPanel1.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, 70, 40));
 
         Check.setText("Show pass");
         Check.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +179,7 @@ public class Login extends javax.swing.JFrame {
                 CheckActionPerformed(evt);
             }
         });
-        jPanel1.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, 20));
+        jPanel1.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +189,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
 
         pack();
@@ -162,32 +197,32 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
-        if(loginAcc(user.getText(),pass.getText())){
-        String user_type = getAccount(user.getText(),pass.getText()); 
+        String username = user.getText();
+        String password = pass.getText();
 
-        if(!status.equals("Pending")){
+            if (loginAcc(username, password)) {
+                String accountType = getAccount(username, password);
 
-            if (user_type.equals("Admin")) {
-                JOptionPane.showMessageDialog(null,"Admin Login Success!");
-                adminWindow ads = new adminWindow();
-                ads.setVisible(true);
-                this.dispose();
-            } else if (user_type.equals("User")) {
-                JOptionPane.showMessageDialog(null,"User Login Success!");
-                HomePage ads = new HomePage();
-                ads.setVisible(true);
-                this.dispose();
+                if (!"Pending".equals(status)) {
+                    if ("Admin".equals(accountType)) {
+                        JOptionPane.showMessageDialog(null, "Admin Login Success!");
+                        adminWindow ads = new adminWindow();
+                        ads.setVisible(true);
+                        this.dispose();
+                    } else if ("User".equals(accountType)) {
+                        JOptionPane.showMessageDialog(null, "User Login Success!");
+                        HomePage homePage = new HomePage();
+                        homePage.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Unknown Account! Please enter your correct account.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sorry, your account is pending. Please contact the administrator to change your status.");
+                }
             } else {
-                JOptionPane.showMessageDialog(null,"Unknown Account! Please enter your correct account."); 
-                return;
+                JOptionPane.showMessageDialog(null, "Login Failed!");
             }
-        } else {
-            JOptionPane.showMessageDialog(null,"Sorry, your account is pending. Please contact the administrator to change your status."); // Message for pending status
-            return;
-        }
-    } else {
-        JOptionPane.showMessageDialog(null,"Login Failed!");
-    }
         
     }//GEN-LAST:event_LOGINActionPerformed
 

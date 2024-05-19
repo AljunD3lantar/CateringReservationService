@@ -1,10 +1,8 @@
 
 package LoginSignup;
 
-import Admin.adminWindow;
 import config.dbConnector;
 import javax.swing.JOptionPane;
-import User.*;
 import config.passHasher;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
@@ -108,13 +106,12 @@ public class Signup extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
         jPanel2.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 169, 30));
 
-        Check.setText("Show pass");
         Check.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CheckActionPerformed(evt);
             }
         });
-        jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, 30));
+        jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 20, 30));
 
         pw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,15 +182,15 @@ public class Signup extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 499, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
@@ -221,27 +218,33 @@ public class Signup extends javax.swing.JFrame {
         try{
         String pass = passHasher.hashPassword(pw.getText());
         
-            if(dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type, user_status) VALUES ('"+fn.getText()+"', '"+us.getText()+"', '"+em.getText()+"', '"+pass+"', '"+pn.getText()+"', '"+ut.getSelectedItem().toString()+"', 'Pending')")){                                        
-                JOptionPane.showMessageDialog(null, "Registered Successfully!");
-                
-            String userType = ut.getSelectedItem().toString();
-            if("Admin".equals(userType)){
-                adminWindow ads = new adminWindow();
-                ads.fullN.setText(""+fullname);
-                ads.setVisible(true);
-                ads.setLocationRelativeTo(null);
-                this.dispose();
-             
-            }else{
-                Login ads = new Login();
-                ads.setVisible(true);
-                this.dispose();
-              }
-            }else{
-                JOptionPane.showMessageDialog(null, "Connection Error!");
+            if ("Admin".equals(ut.getSelectedItem().toString())) {
+                if (dbc.insertData("INSERT INTO tbl_admin (admin_name, admin_username, admin_email, admin_password, admin_phonenumber, "
+                        + "type, admin_status) VALUES ('" + fn.getText() + "', '" + us.getText() + "', '" + em.getText() + "', '" + pass 
+                        + "', '" + pn.getText() + "','" + ut.getSelectedItem().toString() + "', 'Pending')")) {
+                    JOptionPane.showMessageDialog(null, "Registered Successfully!");
+
+                    Login ads = new Login();
+                    ads.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Connection Error!");
+                }
+            } else {
+                if (dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type,"
+                        + " user_status) VALUES ('" + fn.getText() + "', '" + us.getText() + "', '" + em.getText() + "', '" + pass + "', '" 
+                        + pn.getText() + "','" + ut.getSelectedItem().toString() + "', 'Pending')")) {
+                    JOptionPane.showMessageDialog(null, "Registered Successfully!");
+
+                    Login ads = new Login();
+                    ads.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Connection Error!");
+                }
             }
-        }catch(NoSuchAlgorithmException ex){
-            System.out.println(""+ex);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("" + ex);
         }
         }
     }//GEN-LAST:event_signup1ActionPerformed

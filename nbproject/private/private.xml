@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/FoodMenu.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/User/user.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/caterpackcontent.java</file>
             <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/LoginSignup/Login.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/SettingsContent/changepass.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/CateringServices.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Settings/Settings.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/CateringPackages.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/Venues.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Reserve/reserve.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/LoginSignup/Signup.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/adminWindow.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/makeAccount.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/userWindows.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/customerReservation.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/UpdateReservation.java</file>
         </group>
     </open-files>
 </project-private>

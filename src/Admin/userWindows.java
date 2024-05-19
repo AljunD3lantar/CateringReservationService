@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Admin;
 
+import Admin.adminWindow;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
@@ -270,7 +267,7 @@ public class userWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_editbuttonMouseExited
 
     private void addbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addbuttonMouseClicked
-        adminRegistration adr = new adminRegistration();
+        makeAccount adr = new makeAccount();
         adr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addbuttonMouseClicked
@@ -287,7 +284,7 @@ public class userWindows extends javax.swing.JFrame {
                 ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE user_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
                 
                 if(rs.next()){
-                adminRegistration adr = new adminRegistration();
+                makeAccount adr = new makeAccount();
                 adr.id.setText(""+rs.getInt("user_id"));
                 adr.fn.setText(""+rs.getString("user_fullname"));
                 adr.un.setText(""+rs.getString("user_username"));

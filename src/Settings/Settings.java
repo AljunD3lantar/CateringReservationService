@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Settings;
 
-import MainframeContent.*;
+import Mainframe.FoodMenu;
+import Mainframe.HomePage;
+import Mainframe.CateringServices;
+import Mainframe.CateringPackages;
 import User.user;
 import config.Session;
 import java.awt.Color;
@@ -36,12 +35,12 @@ public class Settings extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         CateringPackages = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        Venues = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         FoodMenu = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         Settings = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        Home = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         Logout = new javax.swing.JLabel();
@@ -87,9 +86,12 @@ public class Settings extends javax.swing.JFrame {
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 0));
+        jPanel2.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("DASHBOARD");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(49, 30, 152, 29);
 
         CateringServices.setBackground(new java.awt.Color(255, 255, 0));
         CateringServices.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,6 +127,9 @@ public class Settings extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel2.add(CateringServices);
+        CateringServices.setBounds(0, 140, 240, 41);
+
         CateringPackages.setBackground(new java.awt.Color(255, 255, 0));
         CateringPackages.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,39 +164,8 @@ public class Settings extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Venues.setBackground(new java.awt.Color(255, 255, 0));
-        Venues.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                VenuesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                VenuesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                VenuesMouseExited(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("VENUES");
-
-        javax.swing.GroupLayout VenuesLayout = new javax.swing.GroupLayout(Venues);
-        Venues.setLayout(VenuesLayout);
-        VenuesLayout.setHorizontalGroup(
-            VenuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VenuesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(87, 87, 87))
-        );
-        VenuesLayout.setVerticalGroup(
-            VenuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VenuesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addContainerGap())
-        );
+        jPanel2.add(CateringPackages);
+        CateringPackages.setBounds(0, 180, 240, 41);
 
         FoodMenu.setBackground(new java.awt.Color(255, 255, 0));
         FoodMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -227,6 +201,9 @@ public class Settings extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel2.add(FoodMenu);
+        FoodMenu.setBounds(0, 220, 240, 41);
+
         Settings.setBackground(new java.awt.Color(255, 255, 0));
         Settings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -261,36 +238,45 @@ public class Settings extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CateringServices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(CateringPackages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(FoodMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Venues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        jPanel2.add(Settings);
+        Settings.setBounds(0, 489, 240, 41);
+
+        Home.setBackground(new java.awt.Color(255, 255, 0));
+        Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomeMouseExited(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("HOME");
+
+        javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
+        Home.setLayout(HomeLayout);
+        HomeLayout.setHorizontalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(39, 39, 39))
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addComponent(CateringServices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(CateringPackages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(FoodMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(Venues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-                .addComponent(Settings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        HomeLayout.setVerticalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jPanel2.add(Home);
+        Home.setBounds(0, 100, 240, 41);
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 240, 530));
 
@@ -458,20 +444,6 @@ public class Settings extends javax.swing.JFrame {
         FoodMenu.setBackground(navicolor);
     }//GEN-LAST:event_FoodMenuMouseExited
 
-    private void VenuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VenuesMouseClicked
-        Venues vn = new Venues();
-        vn.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_VenuesMouseClicked
-
-    private void VenuesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VenuesMouseEntered
-        Venues.setBackground(hovering);
-    }//GEN-LAST:event_VenuesMouseEntered
-
-    private void VenuesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VenuesMouseExited
-        Venues.setBackground(navicolor);
-    }//GEN-LAST:event_VenuesMouseExited
-
     private void SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsMouseClicked
         Settings set = new Settings();
         set.setVisible(true);
@@ -524,6 +496,20 @@ public class Settings extends javax.swing.JFrame {
         Logout.setBackground(body);
     }//GEN-LAST:event_LogoutMouseExited
 
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        HomePage ads = new HomePage();
+        ads.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
+
+    private void HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseEntered
+        Home.setBackground(hovering);
+    }//GEN-LAST:event_HomeMouseEntered
+
+    private void HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseExited
+        Home.setBackground(navicolor);
+    }//GEN-LAST:event_HomeMouseExited
+
     
     
     
@@ -571,19 +557,19 @@ public class Settings extends javax.swing.JFrame {
     private javax.swing.JPanel CateringPackages;
     private javax.swing.JPanel CateringServices;
     private javax.swing.JPanel FoodMenu;
+    private javax.swing.JPanel Home;
     private javax.swing.JLabel Logout;
     private javax.swing.JPanel Settings;
     private javax.swing.JLabel UserPersonalInfo;
-    private javax.swing.JPanel Venues;
     private javax.swing.JTextField fullnames;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

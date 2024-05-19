@@ -45,7 +45,7 @@ public class receiptmaker extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
         jPanel1.add(fulnames, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 240, 30));
 
-        jLabel2.setText("Date of Event:");
+        jLabel2.setText("Time of Event:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
         jPanel1.add(dates, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 240, 30));
 
@@ -70,7 +70,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 resetActionPerformed(evt);
             }
         });
-        jPanel1.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 70, 40));
+        jPanel1.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 70, 40));
 
         printreceipt.setText("Print Receipt");
         printreceipt.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 printreceiptActionPerformed(evt);
             }
         });
-        jPanel1.add(printreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, -1, 40));
+        jPanel1.add(printreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, 40));
 
         genreceipt.setText("Generate Receipt");
         genreceipt.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +86,7 @@ public class receiptmaker extends javax.swing.JFrame {
                 genreceiptActionPerformed(evt);
             }
         });
-        jPanel1.add(genreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, 40));
+        jPanel1.add(genreceipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, 40));
 
         CustomerReceipt.setEditable(false);
         CustomerReceipt.setColumns(20);
@@ -94,7 +94,7 @@ public class receiptmaker extends javax.swing.JFrame {
         CustomerReceipt.setRows(5);
         jScrollPane2.setViewportView(CustomerReceipt);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 340, 420));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 340, 420));
 
         jLabel5.setText("Date of Event:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
@@ -107,11 +107,11 @@ public class receiptmaker extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

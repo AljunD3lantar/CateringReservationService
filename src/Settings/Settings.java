@@ -1,15 +1,10 @@
 
 package Settings;
 
-<<<<<<< HEAD
-import Mainframe.FoodMenu;
 import Mainframe.HomePage;
-=======
-import Mainframe.Venues;
-import Mainframe.FoodMenu;
->>>>>>> cb6cecda88f028850a703f216c95baf7db600dbb
-import Mainframe.CateringServices;
-import Mainframe.CateringPackages;
+import Mainframe.caterpackcont;
+import Mainframe.caterservcont;
+import Mainframe.foodmenucont;
 import User.user;
 import config.Session;
 import java.awt.Color;
@@ -408,13 +403,13 @@ public class Settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CateringServicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateringServicesMouseClicked
-        CateringServices cs = new CateringServices();
+        caterservcont cs = new caterservcont();
         cs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CateringServicesMouseClicked
 
     private void CateringPackagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateringPackagesMouseClicked
-        CateringPackages cp = new CateringPackages();
+        caterpackcont cp = new caterpackcont();
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CateringPackagesMouseClicked
@@ -436,7 +431,7 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_CateringPackagesMouseExited
 
     private void FoodMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FoodMenuMouseClicked
-      FoodMenu fm = new FoodMenu();
+      foodmenucont fm = new foodmenucont();
       fm.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_FoodMenuMouseClicked

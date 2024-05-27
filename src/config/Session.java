@@ -1,6 +1,8 @@
 
 package config;
 
+import java.sql.Date;
+
 
 public class Session {
     
@@ -13,6 +15,7 @@ public class Session {
     private String phonenumber;
     private String usertype;
     private String status;
+    private Date date;
     
     private Session(){
         
@@ -92,8 +95,14 @@ public class Session {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
     
 }
 

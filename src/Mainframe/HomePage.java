@@ -313,13 +313,13 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CateringServicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateringServicesMouseClicked
-        CateringServices ads = new CateringServices();
+        caterservcont ads = new caterservcont();
         ads.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CateringServicesMouseClicked
 
     private void CateringPackagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateringPackagesMouseClicked
-        CateringPackages ads = new CateringPackages();
+        caterpackcont ads = new caterpackcont();
         ads.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CateringPackagesMouseClicked
@@ -341,7 +341,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_CateringPackagesMouseExited
 
     private void FoodMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FoodMenuMouseClicked
-        FoodMenu ads = new FoodMenu();
+        foodmenucont ads = new foodmenucont();
         ads.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FoodMenuMouseClicked

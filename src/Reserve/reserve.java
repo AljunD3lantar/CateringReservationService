@@ -1,6 +1,6 @@
 package Reserve;
 
-import Mainframe.caterpackcontent;
+import MainframeCont.caterpackcontent;
 import config.Session;
 import config.dbConnector;
 import java.sql.Connection;
@@ -145,47 +145,58 @@ public class reserve extends javax.swing.JFrame {
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
             try {
-        // Get user inputs
-        String fullName = customername.getText();
-        String email = customeremail.getText();
-        String phoneNumber = phonenum.getText();
-        Date selectedDate = dates.getDate();
-        String eventType = typeofevent.getText();
-        int attendees = Integer.parseInt(numofattendees.getText());
-        String message = addmessage.getText();
+    // Get user inputs
+                String fullName = customername.getText();
+                String email = customeremail.getText();
+                String phoneNumber = phonenum.getText();
+                Date selectedDate = dates.getDate();
+                String eventType = typeofevent.getText();
+                int attendees = Integer.parseInt(numofattendees.getText());
+                String message = addmessage.getText();
 
-        // Validate inputs
-        if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || selectedDate == null || eventType.isEmpty() || attendees <= 0) {
-            JOptionPane.showMessageDialog(null, "Please fill in all fields correctly.");
-            return;
-        }
+                // Validate inputs
+                if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || selectedDate == null || eventType.isEmpty() || attendees <= 0) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all fields correctly.");
+                    return;
+                }
 
-        // Fetch user information based on user_id
-        dbConnector dbc = new dbConnector();
-        ResultSet rs = dbc.getData("SELECT user_id FROM tbl_user WHERE user_fullname = '" + fullName + "' AND user_email = '" + email + "' AND user_phonenumber = '" + phoneNumber + "'");
+                // Fetch user information based on user_id
+                dbConnector dbc = new dbConnector();
+                Connection conn = dbc.getConnection();
+                String userQuery = "SELECT user_id FROM tbl_user WHERE user_fullname = '" + fullName + 
+                                   "' AND user_email = '" + email + "' AND user_phonenumber = '" + phoneNumber + "'";
+                Statement userStmt = conn.createStatement();
+                ResultSet rs = userStmt.executeQuery(userQuery);
 
-        if (rs.next()) {
-            int userId = rs.getInt("user_id");
+                if (rs.next()) {
+                    int userId = rs.getInt("user_id");
 
-            // Insert reservation data with retrieved user_id
-            String insertQuery = "INSERT INTO tbl_reservation (user_id, res_date, type_of_event, num_of_attendees, add_message) VALUES "
-                               + "(" + userId + ", '" + new java.sql.Date(selectedDate.getTime()) + "', '" + eventType + "', " + attendees + ", '" + message + "')";
+                    String insertQuery = "INSERT INTO tbl_reservation (user_id, res_date, type_of_event, num_of_attendees, add_message, status) VALUES " +
+                                         "(" + userId + ", '" + new java.sql.Date(selectedDate.getTime()) + "', '" + eventType + "', " + attendees + ", '" + message + "', 'Pending')";
 
-            if (dbc.insertData(insertQuery)) {
-                JOptionPane.showMessageDialog(null, "Your booking has been reserved. Wait for the confirmation of the admin.");
-                caterpackcontent cpc = new caterpackcontent();
-                cpc.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to reserve booking. Please try again.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "User not found. Please check the provided information.");
-        }
-    } catch (SQLException | NumberFormatException ex) {
-        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-    }  
-        
+                    Statement insertStmt = conn.createStatement();
+                    int rowsInserted = insertStmt.executeUpdate(insertQuery);
+
+                    if (rowsInserted > 0) {
+                        JOptionPane.showMessageDialog(null, "Your booking has been reserved. Wait for the confirmation of the admin.");
+                        caterpackcontent cpc = new caterpackcontent();
+                        cpc.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to reserve booking. Please try again.");
+                    }
+                    insertStmt.close();
+                } else {
+                    JOptionPane.showMessageDialog(null, "User not found. Please check the provided information.");
+                }
+
+                rs.close();
+                userStmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+}
+          
     }//GEN-LAST:event_SubmitActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

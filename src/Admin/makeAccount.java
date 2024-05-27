@@ -1,4 +1,3 @@
-
 package Admin;
 
 import config.dbConnector;
@@ -7,11 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
-
-public class makeAccount extends javax.swing.JFrame {
-
-    
+public class makeAccount extends javax.swing.JFrame {    
     
     public makeAccount() {
         initComponents();

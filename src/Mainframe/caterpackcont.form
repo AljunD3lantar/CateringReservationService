@@ -360,7 +360,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="Wedding" min="-2" max="-2" attributes="0"/>
+                      <Component id="Birthday" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="kidsParty" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
@@ -382,7 +382,7 @@
                       <EmptySpace pref="193" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="normalParty" max="32767" attributes="0"/>
-                          <Component id="Wedding" max="32767" attributes="0"/>
+                          <Component id="Birthday" max="32767" attributes="0"/>
                           <Component id="kidsParty" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
@@ -399,15 +399,16 @@
                 <Property name="text" type="java.lang.String" value="CATERING PACKAGES"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JPanel" name="Wedding">
+            <Container class="javax.swing.JPanel" name="Birthday">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="99" red="ff" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="WeddingMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="WeddingMouseExited"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BirthdayMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BirthdayMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BirthdayMouseExited"/>
               </Events>
 
               <Layout>

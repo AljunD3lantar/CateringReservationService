@@ -1,8 +1,5 @@
 package Mainframe;
 
-import Mainframe.*;
-import Mainframe.CateringPackages;
-import Mainframe.HomePage;
 import Settings.Settings;
 import java.awt.Color;
 
@@ -396,7 +393,7 @@ public class caterservcont extends javax.swing.JFrame {
     }//GEN-LAST:event_CateringServicesMouseClicked
 
     private void CateringPackagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateringPackagesMouseClicked
-        CateringPackages cp = new CateringPackages();
+        caterpackcont cp = new caterpackcont();
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CateringPackagesMouseClicked
@@ -418,7 +415,7 @@ public class caterservcont extends javax.swing.JFrame {
     }//GEN-LAST:event_CateringPackagesMouseExited
 
     private void FoodMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FoodMenuMouseClicked
-        FoodMenu fm = new FoodMenu();
+        foodmenucont fm = new foodmenucont();
         fm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FoodMenuMouseClicked

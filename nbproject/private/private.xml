@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/MainframeContent/caterpackcontent.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/LoginSignup/Login.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Reserve/reserve.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/LoginSignup/Signup.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/adminWindow.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/makeAccount.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/userWindows.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/customerReservation.java</file>
-            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/t/src/Admin/UpdateReservation.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Admin/customerReservation.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Admin/makeAccount.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/MainframeCont/caterpackcontent.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Reserve/reserve.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Admin/UpdateReservation.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Mainframe/caterpackcont.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/Admin/userWindows.java</file>
+            <file>file:/C:/Users/flank/Documents/NetBeansProjects/GuiCater-master/CateringReservationServices/src/config/dbConnector.java</file>
         </group>
     </open-files>
 </project-private>

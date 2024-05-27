@@ -1,5 +1,6 @@
 package Mainframe;
 
+import MainframeCont.caterpackcontent;
 import Settings.Settings;
 import java.awt.Color;
 
@@ -37,7 +38,7 @@ public class caterpackcont extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Wedding = new javax.swing.JPanel();
+        Birthday = new javax.swing.JPanel();
         kidsParty = new javax.swing.JPanel();
         normalParty = new javax.swing.JPanel();
 
@@ -276,24 +277,27 @@ public class caterpackcont extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         jLabel1.setText("CATERING PACKAGES");
 
-        Wedding.setBackground(new java.awt.Color(255, 153, 51));
-        Wedding.addMouseListener(new java.awt.event.MouseAdapter() {
+        Birthday.setBackground(new java.awt.Color(255, 153, 51));
+        Birthday.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BirthdayMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                WeddingMouseEntered(evt);
+                BirthdayMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                WeddingMouseExited(evt);
+                BirthdayMouseExited(evt);
             }
         });
 
-        javax.swing.GroupLayout WeddingLayout = new javax.swing.GroupLayout(Wedding);
-        Wedding.setLayout(WeddingLayout);
-        WeddingLayout.setHorizontalGroup(
-            WeddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BirthdayLayout = new javax.swing.GroupLayout(Birthday);
+        Birthday.setLayout(BirthdayLayout);
+        BirthdayLayout.setHorizontalGroup(
+            BirthdayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        WeddingLayout.setVerticalGroup(
-            WeddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        BirthdayLayout.setVerticalGroup(
+            BirthdayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -345,7 +349,7 @@ public class caterpackcont extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(Wedding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Birthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(kidsParty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
@@ -364,7 +368,7 @@ public class caterpackcont extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(normalParty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Wedding, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Birthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(kidsParty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(134, 134, 134))
         );
@@ -442,13 +446,13 @@ public class caterpackcont extends javax.swing.JFrame {
         Settings.setBackground(navicolor);
     }//GEN-LAST:event_SettingsMouseExited
 
-    private void WeddingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WeddingMouseEntered
-        Wedding.setBackground(hovering);
-    }//GEN-LAST:event_WeddingMouseEntered
+    private void BirthdayMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BirthdayMouseEntered
+        Birthday.setBackground(hovering);
+    }//GEN-LAST:event_BirthdayMouseEntered
 
-    private void WeddingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WeddingMouseExited
-        Wedding.setBackground(weddingbg);
-    }//GEN-LAST:event_WeddingMouseExited
+    private void BirthdayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BirthdayMouseExited
+        Birthday.setBackground(weddingbg);
+    }//GEN-LAST:event_BirthdayMouseExited
 
     private void kidsPartyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kidsPartyMouseEntered
         kidsParty.setBackground(hovering);
@@ -479,6 +483,12 @@ public class caterpackcont extends javax.swing.JFrame {
     private void HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseExited
         Home.setBackground(navicolor);
     }//GEN-LAST:event_HomeMouseExited
+
+    private void BirthdayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BirthdayMouseClicked
+        caterpackcontent cpc = new caterpackcontent();
+        cpc.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BirthdayMouseClicked
 
     
     
@@ -530,12 +540,12 @@ public class caterpackcont extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Birthday;
     private javax.swing.JPanel CateringPackages;
     private javax.swing.JPanel CateringServices;
     private javax.swing.JPanel FoodMenu;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel Settings;
-    private javax.swing.JPanel Wedding;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

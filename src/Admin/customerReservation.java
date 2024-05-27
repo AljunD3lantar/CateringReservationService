@@ -14,14 +14,17 @@ public class customerReservation extends javax.swing.JFrame {
     public customerReservation() {
         initComponents();
         displayData();
+        customerconfirmation.setDefaultEditor(Object.class, null);
     }
     
     public void displayData(){
         try {
-        dbConnector dbc = new dbConnector();
-        ResultSet rs = dbc.getData("SELECT r.res_id, u.user_fullname, u.user_email, r.res_date, r.type_of_event, r.num_of_attendees, r.add_message, 'Pending' AS status FROM tbl_reservation r JOIN tbl_user u ON r.user_id = u.user_id");
-        customerconfirmation.setModel(DbUtils.resultSetToTableModel(rs));
-        rs.close();
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT r.res_id, u.user_fullname, u.user_email, u.user_phonenumber, r.res_date, r.type_of_event, r.num_of_attendees, r.add_message, r.status " +
+                                       "FROM tbl_reservation r " +
+                                       "JOIN tbl_user u ON r.user_id = u.user_id");
+            customerconfirmation.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.close();
         } catch (SQLException ex) {
             System.out.println("Errors: " + ex.getMessage());
         }
@@ -36,8 +39,8 @@ public class customerReservation extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         customerconfirmation = new javax.swing.JTable();
-        jCheckBox1 = new javax.swing.JCheckBox();
         showinfo = new javax.swing.JButton();
+        archive = new javax.swing.JButton();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,14 +53,14 @@ public class customerReservation extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 70));
 
         customerconfirmation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,15 +75,7 @@ public class customerReservation extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(customerconfirmation);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 590, 290));
-
-        jCheckBox1.setText("Confirm");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 420, -1, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 710, 290));
 
         showinfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         showinfo.setText("Show Info");
@@ -89,7 +84,16 @@ public class customerReservation extends javax.swing.JFrame {
                 showinfoActionPerformed(evt);
             }
         });
-        jPanel1.add(showinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, 40));
+        jPanel1.add(showinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, 40));
+
+        archive.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        archive.setText("Archive");
+        archive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                archiveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(archive, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 90, 40));
 
         back.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         back.setText("Back");
@@ -98,63 +102,71 @@ public class customerReservation extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 90, 40));
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void showinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showinfoActionPerformed
-        int rowIndex = customerconfirmation.getSelectedRow();
+         int rowIndex = customerconfirmation.getSelectedRow();
 
 if (rowIndex < 0) {
-    JOptionPane.showMessageDialog(null, "Select an account to edit.");
+    JOptionPane.showMessageDialog(null, "Select an account to show information.");
 } else {
     try {
         dbConnector dbc = new dbConnector();
         TableModel tbl = customerconfirmation.getModel();
-        
-        ResultSet rs = dbc.getData("SELECT r.*, u.user_fullname, u.user_email, u.user_phonenumber " +
-                                    "FROM tbl_reservation r " +
-                                    "JOIN tbl_user u ON r.user_id = u.user_id " +
-                                    "WHERE res_id = '" + tbl.getValueAt(rowIndex, 0) + "'");
 
-        if (rs.next()) {
+        ResultSet rs = dbc.getData("SELECT r.res_id, u.user_fullname, u.user_email, u.user_phonenumber, r.res_date, r.type_of_event, r.num_of_attendees, r.add_message, r.status " +
+                       "FROM tbl_reservation r " +
+                       "JOIN tbl_user u ON r.user_id = u.user_id " +
+                       "WHERE r.res_id = '" + tbl.getValueAt(rowIndex, 0).toString() + "'");
+
+        if (rs != null && rs.next()) {
             UpdateReservation ur = new UpdateReservation();
 
+            ur.resID.setText(rs.getString("res_id"));
             ur.customfulname.setText(rs.getString("user_fullname"));
             ur.emailss.setText(rs.getString("user_email"));
             ur.phonenumber.setText(rs.getString("user_phonenumber"));
             ur.dates.setDate(rs.getDate("res_date"));
             ur.typesofevent.setText(rs.getString("type_of_event"));
-            ur.numofattends.setText(rs.getString("num_of_attendees"));
+            ur.numofattends.setText(String.valueOf(rs.getInt("num_of_attendees")));
             ur.addmessage.setText(rs.getString("add_message"));
-            ur.stats.setSelectedItem(""+rs.getString("status"));
-            
+            ur.stats.setSelectedItem(rs.getString("status"));
+
             ur.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "No data found for the selected reservation.");
         }
-        rs.close();
+
+        if (rs != null) {
+            rs.close();
+        }
     } catch (SQLException ex) {
-        System.out.println("" + ex);
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
     }
 }
 TableModel tbl = customerconfirmation.getModel();
     }//GEN-LAST:event_showinfoActionPerformed
+
+    private void archiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveActionPerformed
+        
+    }//GEN-LAST:event_archiveActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         adminWindow aw = new adminWindow();
@@ -198,9 +210,9 @@ TableModel tbl = customerconfirmation.getModel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton archive;
     private javax.swing.JButton back;
     private javax.swing.JTable customerconfirmation;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;

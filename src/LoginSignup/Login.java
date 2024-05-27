@@ -3,14 +3,12 @@ package LoginSignup;
 
 import Admin.*;
 import Mainframe.HomePage;
-import User.*;
 import config.dbConnector;
 import config.Session;
 import config.passHasher;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {

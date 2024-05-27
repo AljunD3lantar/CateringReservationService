@@ -20,7 +20,7 @@ public class customerReservation extends javax.swing.JFrame {
     public void displayData(){
         try {
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT r.res_id, u.user_fullname, u.user_email, u.user_phonenumber, r.res_date, r.type_of_event, r.num_of_attendees, r.add_message, r.status " +
+            ResultSet rs = dbc.getData("SELECT r.res_id, u.user_fullname, u.user_email, u.user_phonenumber, r.status " +
                                        "FROM tbl_reservation r " +
                                        "JOIN tbl_user u ON r.user_id = u.user_id");
             customerconfirmation.setModel(DbUtils.resultSetToTableModel(rs));

@@ -132,12 +132,17 @@
                                       <Component id="customfulname" min="-2" pref="237" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+<<<<<<< HEAD
                               <EmptySpace max="32767" attributes="0"/>
+=======
+                              <EmptySpace pref="53" max="32767" attributes="0"/>
+>>>>>>> 768668366246d0240481359d179f04d421a765d2
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="Back" min="-2" pref="77" max="-2" attributes="0"/>
@@ -148,6 +153,16 @@
                                       <Component id="stats" alignment="1" min="-2" pref="237" max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" alignment="1" min="-2" pref="237" max="-2" attributes="0"/>
                                   </Group>
+=======
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="Back" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="Reserved" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="stats" alignment="1" min="-2" pref="237" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="1" min="-2" pref="237" max="-2" attributes="0"/>
+>>>>>>> 768668366246d0240481359d179f04d421a765d2
                               </Group>
                               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                           </Group>

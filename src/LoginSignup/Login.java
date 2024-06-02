@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
     
     try {
         
-        String adminQuery = "SELECT * FROM tbl_admin WHERE admin_username = '" + username + "'";
+        String adminQuery = "SELECT * FROM admin WHERE admin_username = '" + username + "'";
         ResultSet adminResultSet = connector.getData(adminQuery);
         
         if (adminResultSet.next()) {
@@ -52,7 +52,7 @@ public class Login extends javax.swing.JFrame {
             }
         }
         
-        String userQuery = "SELECT * FROM tbl_user WHERE user_username = '" + username + "'";
+        String userQuery = "SELECT * FROM user WHERE user_username = '" + username + "'";
         ResultSet userResultSet = connector.getData(userQuery);
         
         if (userResultSet.next()) {
@@ -89,14 +89,14 @@ public class Login extends javax.swing.JFrame {
         dbConnector connector = new dbConnector();
             try {
                 
-                String adminQuery = "SELECT * FROM tbl_admin WHERE admin_username = '" + username + "'";
+                String adminQuery = "SELECT * FROM admin WHERE admin_username = '" + username + "'";
                 ResultSet adminResultSet = connector.getData(adminQuery);
                 if (adminResultSet.next()) {
                     return "Admin";
                     
                 }
 
-                    String userQuery = "SELECT * FROM tbl_user WHERE user_username = '" + username + "'";
+                    String userQuery = "SELECT * FROM user WHERE user_username = '" + username + "'";
                     ResultSet userResultSet = connector.getData(userQuery);
                     if (userResultSet.next()) {
                         return userResultSet.getString("user_type");

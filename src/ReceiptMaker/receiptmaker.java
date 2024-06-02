@@ -1,23 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ReceiptMaker;
 
-import Admin.adminWindow;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author flank
- */
 public class receiptmaker extends javax.swing.JFrame {
+    
+    Double totalAmount=0.0;
+    Double cash=0.0;
+    Double balance=0.0;
+    Double bHeight=0.0;
+    
+    ArrayList<String> itemName = new ArrayList<>();
+    ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<String> itemPrice = new ArrayList<>();
+    ArrayList<String> subtotal = new ArrayList<>();
 
-    /**
-     * Creates new form tableReceipt
-     */
     public receiptmaker() {
         initComponents();
     }
@@ -27,172 +37,332 @@ public class receiptmaker extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        txtname = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        fulnames = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtitemname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        numattend = new javax.swing.JTextField();
+        txtquantity = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        time = new javax.swing.JTextField();
+        txtsubtotal = new javax.swing.JTextField();
+        txtprice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        Generate = new javax.swing.JButton();
-        Back = new javax.swing.JButton();
-        Print = new javax.swing.JButton();
-        Reset = new javax.swing.JButton();
-        dates = new com.toedter.calendar.JDateChooser();
+        add = new javax.swing.JButton();
+        txtbalance = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        locations = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        totpay = new javax.swing.JTextField();
+        txtcash = new javax.swing.JTextField();
+        txttotalAmount = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        paymeth = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        CustomerReceipt = new javax.swing.JTextArea();
+        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txtname.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel2.setText("Customer Fullname:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        jPanel1.add(fulnames, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 210, 30));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 153));
 
-        jLabel3.setText("Date of Event:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-        jPanel1.add(numattend, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 210, 30));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("RECEIPT MAKER FORM");
 
-        jLabel4.setText("Number of Attendees:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-        jPanel1.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, 30));
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel2)
+                .addContainerGap(231, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
+        );
 
-        jLabel5.setText("Time of Event:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel1.setText("Rentals/Cater Name:");
 
-        Generate.setText("Generate");
-        Generate.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel3.setText("Quantity:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel4.setText("Sub Total:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel5.setText("Item/Cater Price:");
+
+        add.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        add.setText("ADD");
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GenerateActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
-        jPanel1.add(Generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 80, 40));
 
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel6.setText("Balance:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel7.setText("Cash:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel8.setText("Total Amount:");
+
+        print.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                printActionPerformed(evt);
             }
         });
-        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 70, 40));
 
-        Print.setText("Print");
-        Print.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrintActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Print, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 70, 40));
-
-        Reset.setText("Reset");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 70, 40));
-        jPanel1.add(dates, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, 30));
-
-        jLabel6.setText("Payment Method:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
-        jPanel1.add(locations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 210, 30));
-
-        jLabel7.setText("Location:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
-        jPanel1.add(totpay, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 210, 30));
-
-        jLabel8.setText("Total Payment:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
-
-        paymeth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Type of Payment", "COD", "GCash", "PayMaya" }));
-        jPanel1.add(paymeth, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 210, 30));
-
-        CustomerReceipt.setColumns(20);
-        CustomerReceipt.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
-        CustomerReceipt.setRows(5);
-        jScrollPane1.setViewportView(CustomerReceipt);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 280, 410));
+        javax.swing.GroupLayout txtnameLayout = new javax.swing.GroupLayout(txtname);
+        txtname.setLayout(txtnameLayout);
+        txtnameLayout.setHorizontalGroup(
+            txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtnameLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtnameLayout.createSequentialGroup()
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(txtnameLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(print))
+                    .addGroup(txtnameLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(add))
+                    .addGroup(txtnameLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(txtnameLayout.createSequentialGroup()
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtitemname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtquantity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, txtnameLayout.createSequentialGroup()
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtprice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtsubtotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, txtnameLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(txtnameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(txtnameLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtcash, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtbalance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(txtnameLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txttotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(89, 89, 89))
+        );
+        txtnameLayout.setVerticalGroup(
+            txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtnameLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtitemname, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txttotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtcash, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(txtnameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void GenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateActionPerformed
-        CustomerReceipt.setText("****************************************\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "* ALMA'S CATERING RESERVATION SERVICES *\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "****************************************\n");
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         
-        Date obj = new Date();
-        String date = obj.toString();
-        String dates = new SimpleDateFormat("mm/dd/yyyy").format(new Date());
-        
-        CustomerReceipt.setText(CustomerReceipt.getText() + "\n" + date + "\n\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Customers Fullname: " + fulnames.getText()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Date of Event: " + dates +"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Time of Event: " + time.getText()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Number of Attendees: " + numattend.getText()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Location: " + locations.getText()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Payment Method: " + paymeth.getSelectedItem().toString()+"\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "Total Payment: " + totpay.getText()+"\n\n");
-        
-        
-        CustomerReceipt.setText(CustomerReceipt.getText() + "****************************************\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "\t THANK YOU FOR CHOOSING \t\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "   ALMA'S CATERING RESERVATION SERVICES\n");
-        CustomerReceipt.setText(CustomerReceipt.getText() + "****************************************\n");
-        
-        System.out.println("Customer Information Filled!");
-    }//GEN-LAST:event_GenerateActionPerformed
+        itemName.add(txtitemname.getText());
+        quantity.add(txtquantity.getText());
+        itemPrice.add(txtprice.getText());
+        subtotal.add(txtsubtotal.getText());
+        totalAmount = totalAmount+ Double.valueOf(txtsubtotal.getText());
+        txttotalAmount.setText(totalAmount+"");
+        clear();
+    }//GEN-LAST:event_addActionPerformed
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        adminWindow aw = new adminWindow();
-        aw.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_BackActionPerformed
-
-    private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
-        try{
-            CustomerReceipt.print();
-            System.out.println("Receipt printed Successfully!");
-        }catch(Exception e){
-            
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        
+        bHeight = Double.valueOf(itemName.size());
+        
+        PrinterJob pj = PrinterJob.getPrinterJob();        
+        pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+        try {
+             pj.print();
+          
         }
-    }//GEN-LAST:event_PrintActionPerformed
+         catch (PrinterException ex) {
+                 ex.printStackTrace();
+        }
+    }//GEN-LAST:event_printActionPerformed
 
-    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        CustomerReceipt.setText("");
-        fulnames.setText("");
-        time.setText("");
-        locations.setText("");
-        totpay.setText("");
-        numattend.setText("");
-        System.out.println("Reset Successfully");
-    }//GEN-LAST:event_ResetActionPerformed
+    private void clear(){
+        
+        txtitemname.setText("");
+        txtquantity.setText("");
+        txtprice.setText("");
+        txtsubtotal.setText("");
+    }
+    
+    public PageFormat getPageFormat(PrinterJob pj){
+    
+        PageFormat pf = pj.defaultPage();
+        Paper paper = pf.getPaper();    
 
-    /**
-     * @param args the command line arguments
-     */
+        double bodyHeight = bHeight;  
+        double headerHeight = 5.0;                  
+        double footerHeight = 5.0;        
+        double width = cm_to_pp(8); 
+        double height = cm_to_pp(headerHeight+bodyHeight+footerHeight); 
+        paper.setSize(width, height);
+        paper.setImageableArea(0,10,width,height - cm_to_pp(1));  
+
+        pf.setOrientation(PageFormat.PORTRAIT);  
+        pf.setPaper(paper);    
+
+        return pf;
+}
+    
+    protected static double cm_to_pp(double cm){            
+	   return toPPI(cm * 0.393600787);            
+    }
+ 
+protected static double toPPI(double inch)
+    {            
+	   return inch * 72d;            
+    }
+    
+public class BillPrintable implements Printable {
+    
+  public int print(Graphics graphics, PageFormat pageFormat,int pageIndex) 
+  throws PrinterException 
+  {    
+      
+      int r= itemName.size();
+      ImageIcon icon=new ImageIcon("C:\\Users\\flank\\Documents\\NetBeansProjects\\GuiCater-master\\CateringReservationService\\src\\images\\ALMA LOGO (1).png"); 
+      int result = NO_SUCH_PAGE;    
+        if (pageIndex == 0) {                    
+        
+            Graphics2D g2d = (Graphics2D) graphics;                    
+            double width = pageFormat.getImageableWidth();                               
+            g2d.translate((int) pageFormat.getImageableX(),(int) pageFormat.getImageableY()); 
+
+        try{
+            int y=20;
+            int yShift = 10;
+            int headerRectHeight=15;
+           // int headerRectHeighta=40;
+            
+                
+            g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
+            g2d.drawImage(icon.getImage(), 50, 20, 90, 30, rootPane);y+=yShift+30;
+            g2d.drawString("-------------------------------------",12,y);y+=yShift;
+            g2d.drawString("         almaskitchen.com        ",12,y);y+=yShift;
+            g2d.drawString("   Lower Linao Minglanilla, Cebu ",12,y);y+=yShift;
+            g2d.drawString("   Facebook: ALMA's Catering "
+                               + "Reservation Services ",12,y);y+=yShift;
+            g2d.drawString("      Smart 0945-547-4321     ",12,y);y+=yShift;
+            g2d.drawString("      Globe 0936-789-2345     ",12,y);y+=yShift;
+            g2d.drawString("-------------------------------------",12,y);y+=headerRectHeight;
+
+            g2d.drawString(" Item Name                  Price   ",10,y);y+=yShift;
+            g2d.drawString("-------------------------------------",10,y);y+=headerRectHeight;
+     
+            for(int s=0; s<r; s++)
+            {
+            g2d.drawString(" "+itemName.get(s)+"                            ",10,y);y+=yShift;
+            g2d.drawString("      "+quantity.get(s)+" * "+itemPrice.get(s),10,y); g2d.drawString(subtotal.get(s),160,y);y+=yShift;
+
+            }
+          
+            g2d.drawString("-------------------------------------",10,y);y+=yShift;
+            g2d.drawString(" Total amount:               "+txttotalAmount.getText()+"   ",10,y);y+=yShift;
+            g2d.drawString("-------------------------------------",10,y);y+=yShift;
+            g2d.drawString(" Cash      :                 "+txtcash.getText()+"   ",10,y);y+=yShift;
+            g2d.drawString("-------------------------------------",10,y);y+=yShift;
+            g2d.drawString(" Balance   :                 "+txtbalance.getText()+"   ",10,y);y+=yShift;
+
+            g2d.drawString("*************************************",10,y);y+=yShift;
+            g2d.drawString("                                     ",10,y);y+=yShift;
+            g2d.drawString("       ____________________          ",10,y);y+=yShift;
+            g2d.drawString("   Customer's Name with Signature    ",10,y);y+=yShift;
+            g2d.drawString("*************************************",10,y);y+=yShift;
+            g2d.drawString("       THANK YOU COME AGAIN            ",10,y);y+=yShift;
+            g2d.drawString("*************************************",10,y);y+=yShift;
+            g2d.drawString("   CONTACT: aldelantar91@gmail.com       ",10,y);y+=yShift;       
+           
+
+    }
+    catch(Exception e){
+    e.printStackTrace();
+    }
+
+              result = PAGE_EXISTS;    
+          }    
+          return result;    
+      }
+   }
+    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -227,13 +397,8 @@ public class receiptmaker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
-    private javax.swing.JTextArea CustomerReceipt;
-    private javax.swing.JButton Generate;
-    private javax.swing.JButton Print;
-    private javax.swing.JButton Reset;
-    private com.toedter.calendar.JDateChooser dates;
-    private javax.swing.JTextField fulnames;
+    private javax.swing.JButton add;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -241,12 +406,15 @@ public class receiptmaker extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField locations;
-    private javax.swing.JTextField numattend;
-    private javax.swing.JComboBox<String> paymeth;
-    private javax.swing.JTextField time;
-    private javax.swing.JTextField totpay;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton print;
+    private javax.swing.JTextField txtbalance;
+    private javax.swing.JTextField txtcash;
+    private javax.swing.JTextField txtitemname;
+    private javax.swing.JPanel txtname;
+    private javax.swing.JTextField txtprice;
+    private javax.swing.JTextField txtquantity;
+    private javax.swing.JTextField txtsubtotal;
+    private javax.swing.JTextField txttotalAmount;
     // End of variables declaration//GEN-END:variables
 }

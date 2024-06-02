@@ -4,9 +4,21 @@ package LoginSignup;
 import config.dbConnector;
 import javax.swing.JOptionPane;
 import config.passHasher;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 
 /**
  *
@@ -22,12 +34,70 @@ public class Signup extends javax.swing.JFrame {
     }
     
     static String email, username, fullname;
+    public String destination = "";
+    public String oldpath;
+    public String path;
+    File selectedFile;
+    
+
+    public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/userphotos", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+    
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+        
+    }
+    
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+        if(ImagePath !=null){
+            MyImage = new ImageIcon(ImagePath);
+        }else{
+            MyImage = new ImageIcon(pic);
+        }
+        
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
     
     public boolean UserEmailExist(){
         
         dbConnector dbc = new dbConnector();
         try{
-            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + us.getText() + "'OR user_email = '" + em.getText() + "'";
+            String query = "SELECT * FROM user  WHERE user_username = '" + us.getText() + "'OR user_email = '" + em.getText() + "'";
             ResultSet resultSet = dbc.getData(query);
             
             if(resultSet.next()){
@@ -85,6 +155,10 @@ public class Signup extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         pn = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        images = new javax.swing.JLabel();
+        Remove = new javax.swing.JButton();
+        Select = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -97,7 +171,7 @@ public class Signup extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SIGNUP FORM");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 150, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 150, -1));
 
         jLabel2.setText("Email:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
@@ -106,12 +180,13 @@ public class Signup extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
         jPanel2.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 169, 30));
 
+        Check.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Check.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CheckActionPerformed(evt);
             }
         });
-        jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 20, 30));
+        jPanel2.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 20, 30));
 
         pw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +202,8 @@ public class Signup extends javax.swing.JFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
         jPanel2.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 169, 30));
 
-        back.setText("Back");
+        back.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        back.setText("BACK");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
@@ -135,6 +211,7 @@ public class Signup extends javax.swing.JFrame {
         });
         jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 70, 30));
 
+        signup1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         signup1.setText("SIGNUP");
         signup1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +237,43 @@ public class Signup extends javax.swing.JFrame {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
         jPanel2.add(pn, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 170, 30));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(images, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(images, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 230, 280));
+
+        Remove.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Remove.setText("REMOVE");
+        Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, 30));
+
+        Select.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Select.setText("SELECT");
+        Select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Select, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, -1, 30));
+
         jPanel4.setLayout(null);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -182,16 +296,16 @@ public class Signup extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 499, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addGap(0, 471, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
         );
 
         pack();
@@ -219,7 +333,7 @@ public class Signup extends javax.swing.JFrame {
         String pass = passHasher.hashPassword(pw.getText());
         
             if ("Admin".equals(ut.getSelectedItem().toString())) {
-                if (dbc.insertData("INSERT INTO tbl_admin (admin_name, admin_username, admin_email, admin_password, admin_phonenumber, "
+                if (dbc.insertData("INSERT INTO admin (admin_name, admin_username, admin_email, admin_password, admin_phonenumber, "
                         + "type, admin_status) VALUES ('" + fn.getText() + "', '" + us.getText() + "', '" + em.getText() + "', '" + pass 
                         + "', '" + pn.getText() + "','" + ut.getSelectedItem().toString() + "', 'Pending')")) {
                     JOptionPane.showMessageDialog(null, "Registered Successfully!");
@@ -231,18 +345,27 @@ public class Signup extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Connection Error!");
                 }
             } else {
-                if (dbc.insertData("INSERT INTO tbl_user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type,"
-                        + " user_status) VALUES ('" + fn.getText() + "', '" + us.getText() + "', '" + em.getText() + "', '" + pass + "', '" 
-                        + pn.getText() + "','" + ut.getSelectedItem().toString() + "', 'Pending')")) {
+                
+                
+                if (dbc.insertData("INSERT INTO user (user_fullname, user_username, user_email, user_password, user_phonenumber, user_type,"
+                        + " user_status, user_image) VALUES ('" + fn.getText() + "', '" + us.getText() + "', '" + em.getText() + "', '" + pass + "', '" 
+                        + pn.getText() + "','" + ut.getSelectedItem().toString() + "', 'Pending', '" + destination + "')")) {
+                    
+                    try{
+                    Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
                     JOptionPane.showMessageDialog(null, "Registered Successfully!");
 
                     Login ads = new Login();
                     ads.setVisible(true);
                     this.dispose();
+                    
+                  }catch(IOException ex){
+                    System.out.println("Insert Image Error: "+ex);
+              }
                 } else {
                     JOptionPane.showMessageDialog(null, "Connection Error!");
                 }
-            }
+           }
         } catch (NoSuchAlgorithmException ex) {
             System.out.println("" + ex);
         }
@@ -272,6 +395,39 @@ public class Signup extends javax.swing.JFrame {
             pw.setEchoChar('*');
         }
     }//GEN-LAST:event_CheckActionPerformed
+
+    private void SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        selectedFile = fileChooser.getSelectedFile();
+                        destination = "src/images/" + selectedFile.getName();
+                        path  = selectedFile.getAbsolutePath();
+                        
+                        
+                        if(FileExistenceChecker(path) == 1){
+                          JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                            destination = "";
+                            path="";
+                        }else{
+                            images.setIcon(ResizeImage(path, null, images));
+                            Select.setEnabled(false);
+                            Remove.setEnabled(true);
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("File Error!");
+                    }
+                }
+    }//GEN-LAST:event_SelectActionPerformed
+
+    private void RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveActionPerformed
+        Remove.setEnabled(false);
+        Select.setEnabled(true);
+        images.setIcon(null);
+        destination = "";
+        path = "";
+    }//GEN-LAST:event_RemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,9 +467,12 @@ public class Signup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox Check;
+    public javax.swing.JButton Remove;
+    public javax.swing.JButton Select;
     private javax.swing.JButton back;
     private javax.swing.JTextField em;
     private javax.swing.JTextField fn;
+    public javax.swing.JLabel images;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -321,6 +480,7 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

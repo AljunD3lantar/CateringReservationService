@@ -4,7 +4,6 @@ import MainframeCont.caterpackcontent;
 import config.Session;
 import config.dbConnector;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -163,7 +162,7 @@ public class reserve extends javax.swing.JFrame {
                 // Fetch user information based on user_id
                 dbConnector dbc = new dbConnector();
                 Connection conn = dbc.getConnection();
-                String userQuery = "SELECT user_id FROM tbl_user WHERE user_fullname = '" + fullName + 
+                String userQuery = "SELECT user_id FROM user WHERE user_fullname = '" + fullName + 
                                    "' AND user_email = '" + email + "' AND user_phonenumber = '" + phoneNumber + "'";
                 Statement userStmt = conn.createStatement();
                 ResultSet rs = userStmt.executeQuery(userQuery);
@@ -171,7 +170,7 @@ public class reserve extends javax.swing.JFrame {
                 if (rs.next()) {
                     int userId = rs.getInt("user_id");
 
-                    String insertQuery = "INSERT INTO tbl_reservation (user_id, res_date, type_of_event, num_of_attendees, add_message, status) VALUES " +
+                    String insertQuery = "INSERT INTO caterreservation (user_id, res_date, type_of_event, num_of_attendees, add_message, status) VALUES " +
                                          "(" + userId + ", '" + new java.sql.Date(selectedDate.getTime()) + "', '" + eventType + "', " + attendees + ", '" + message + "', 'Pending')";
 
                     Statement insertStmt = conn.createStatement();

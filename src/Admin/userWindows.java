@@ -28,7 +28,7 @@ public class userWindows extends javax.swing.JFrame {
     public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT user_id, user_fullname, user_email, user_status FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT user_id, user_fullname, user_email, user_status FROM user");
             userTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
@@ -280,11 +280,11 @@ public class userWindows extends javax.swing.JFrame {
             try{
                 dbConnector dbc = new dbConnector();
                 TableModel tbl = userTable.getModel();
-                ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE user_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                ResultSet rs = dbc.getData("SELECT * FROM user WHERE user_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
                 
                 if(rs.next()){
                 makeAccount adr = new makeAccount();
-                adr.id.setText(""+rs.getInt("user_id"));
+                adr.uid.setText(""+rs.getInt("user_id"));
                 adr.fn.setText(""+rs.getString("user_fullname"));
                 adr.un.setText(""+rs.getString("user_username"));
                 adr.em.setText(""+rs.getString("user_email"));
@@ -292,9 +292,22 @@ public class userWindows extends javax.swing.JFrame {
                 adr.pn.setText(""+rs.getString("user_phonenumber"));
                 adr.ut.setSelectedItem(""+rs.getString("user_type"));
                 adr.us.setSelectedItem(""+rs.getString("user_status"));
+                adr.image.setIcon(adr.ResizeImage(rs.getString("user_image"), null, adr.image));
+                adr.oldpath = rs.getString("user_image");
+                adr.path = rs.getString("user_image");
+                adr.destination = rs.getString("user_image");
                 adr.Add.setEnabled(false);
                 adr.update.setEnabled(true);
                 adr.setVisible(true);
+                
+                if(rs.getString("user_image").isEmpty()){
+                    adr.select.setEnabled(true);
+                    adr.remove.setEnabled(false);
+                }else{
+                    adr.select.setEnabled(false);
+                    adr.remove.setEnabled(true);
+                }
+                
                 this.dispose();     
                }
             }catch(SQLException ex){
